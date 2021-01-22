@@ -1,0 +1,8 @@
+.header{
+    grid-area: h;
+    background-color: aliceblue;
+}
+.header img{
+    width: 20px;
+    position: relative;
+}
