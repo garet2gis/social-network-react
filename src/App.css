@@ -14,6 +14,7 @@
 .app-wrapper-content{
     grid-area: c;
     background-color: lemonchiffon;
+
 }
 
 .app-wrapper-content .img_header{
