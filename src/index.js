@@ -11,7 +11,7 @@ export let renderEntireTree = () => {
     ReactDOM.render(
         <BrowserRouter>
             <React.StrictMode>
-                <App state={store.getState()} dispatch ={store.dispatch.bind(store)}  />  {/*bad architecture*/}
+                <App store = {store} />  {/*bad architecture*/}
             </React.StrictMode>
         </BrowserRouter>,
         document.getElementById('root')
