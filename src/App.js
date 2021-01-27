@@ -25,7 +25,6 @@ const App = (props) => {
                 <Route path='/settings' render={() => <Settings/>}/>
             </div>
         </div>
-
     );
 }
 
