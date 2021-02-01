@@ -2,6 +2,7 @@ import React from "react";
 import User from "./User/User";
 import classes from './Users.module.css'
 import classNames from 'classnames'
+import Loader from "../common/Loader/Loader";
 
 let Users = (props) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
@@ -9,8 +10,10 @@ let Users = (props) => {
     for (let i = 1; i <= pagesCount; i++) pages.push(i);
     let users = props.users.map(u => <User key={u.id} user={u} follow={props.follow}
                                            unfollow={props.unfollow}/>);
+
     return (
         <div>
+            {props.isFetching?<Loader/>:null}
             {
                 pages.map(p => {
                     return <span
