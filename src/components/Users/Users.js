@@ -1,11 +1,16 @@
 import React from "react";
 import User from "./User/User";
+import * as axios from "axios";
+
 
 let Users = (props) =>{
 
     if (props.users.length === 0) {
-
-        props.setUsers([
+        axios.get("https://social-network.samuraijs.com/api/1.0/users")
+            .then(response =>{
+                props.setUsers(response.data.items)
+            })
+       /* props.setUsers([
             {
                 id: 1,
                 photoUrl: 'https://i.pinimg.com/736x/2d/0e/41/2d0e419c310033945063c6c9884b2725.jpg',
@@ -29,7 +34,7 @@ let Users = (props) =>{
                 status: 'big',
                 location: {city: 'Kiev', country: 'Ukraine'}
             }
-        ]);
+        ]);*/
     }
     let users = props.users.map(u => <User key = {u.id} user = {u} follow = {props.follow} unfollow = {props.unfollow}/>);
 
