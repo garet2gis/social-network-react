@@ -2,6 +2,7 @@ import React from "react";
 import User from "./User/User";
 import * as axios from "axios";
 import classes from './Users.module.css'
+import classNames from 'classnames'
 
 class Users extends React.Component {
     componentDidMount() {
@@ -33,8 +34,8 @@ class Users extends React.Component {
             <div>
                 {
                     pages.map(p => {
-                        return <span className={this.props.currentPage === p && classes.selectedPage}
-                        onClick={()=>{this.onPageChanged(p);}}>{p}</span>
+                        return <span className={classNames(this.props.currentPage === p && classes.selectedPage, classes.pageNumber)}
+                        onClick={()=>{this.onPageChanged(p);}}>{` ${p} `}</span>
                     })
                 }
                 {users}
