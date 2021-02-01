@@ -12,9 +12,9 @@ export let renderEntireTree = () => {
     ReactDOM.render(
         <BrowserRouter>
             <Provider store={store}>
-                <React.StrictMode>
+                {/*<React.StrictMode>*/}
                     <App/>
-                </React.StrictMode>
+                {/*</React.StrictMode>*/}
             </Provider>
         </BrowserRouter>,
         document.getElementById('root')
