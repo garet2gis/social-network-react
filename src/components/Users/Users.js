@@ -2,7 +2,7 @@ import React from "react";
 import User from "./User/User";
 import classes from './Users.module.css'
 import classNames from 'classnames'
-import Loader from "../common/Loader/Loader";
+import Preloader from "../common/Preloader/Preloader";
 
 let Users = (props) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
@@ -13,14 +13,14 @@ let Users = (props) => {
 
     return (
         <div>
-            {props.isFetching?<Loader/>:null}
+            {props.isFetching ? <Preloader/> : null}
             {
                 pages.map(p => {
                     return <span
                         className={classNames(props.currentPage === p && classes.selectedPage, classes.pageNumber)}
                         onClick={() => {
                             props.onPageChanged(p);
-                        }}>{` ${p} `}</span>
+                        }} key={p}>{` ${p} `}</span>
                 })
             }
             {users}
