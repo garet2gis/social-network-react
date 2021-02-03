@@ -1,7 +1,7 @@
 import React from "react";
 import classes from './ProfileInfo.module.css';
 import Preloader from "../../common/Preloader/Preloader";
-
+import userAsset from '../../../assets/images/userAsset.png'
 const ProfileInfo = (props) => {
     if (!props.profile) {
         return (
@@ -15,7 +15,7 @@ const ProfileInfo = (props) => {
                      className='img_header' alt='background'/>
             </div>
             <div className={classes.descriptionBlock}>
-                <img src={props.profile.photos.large} alt='avatar'/>
+                <img src={props.profile.photos.large ? props.profile.photos.large:userAsset} className={classes.profilePhoto} alt='avatar'/>
                 <div>{props.profile.fullName}</div>
                 <div>{props.profile.aboutMe}</div>
             </div>
