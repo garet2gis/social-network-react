@@ -9,8 +9,9 @@ let Users = (props) => {
     let pages = [];
     for (let i = 1; i <= pagesCount; i++) pages.push(i);
     let users = props.users.map(u => <User key={u.id} user={u} follow={props.follow}
-                                           unfollow={props.unfollow}/>);
-
+                                           unfollow={props.unfollow}
+                                           followingInProgress ={props.followingInProgress}
+                                           toggleFollowingProgress ={props.toggleFollowingProgress}/>);
     return (
         <div>
             {props.isFetching ? <Preloader/> : null}
