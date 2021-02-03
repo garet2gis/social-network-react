@@ -9,25 +9,25 @@ import {
 } from "../../redux/users-reducer";
 import Users from "./Users";
 import React from "react";
-import * as axios from "axios";
+import usersAPI from "../../api/usersAPI";
 
 class UsersContainer extends React.Component {
     componentDidMount() {
         this.props.toggleFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
-            .then(response => {
-                this.props.toggleFetching(false);
-                this.props.setUsers(response.data.items);
-                this.props.setTotalUserCount(response.data.totalCount);
-            })
+        usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
+            .then(data => {
+                    this.props.toggleFetching(false);
+                    this.props.setUsers(data.items);
+                    this.props.setTotalUserCount(data.totalCount);
+                })
     }
     onPageChanged = (currentPage) => {
         this.props.setCurrentPage(currentPage);
         this.props.toggleFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${this.props.pageSize}`)
-            .then(response => {
+        usersAPI.getUsers(currentPage,this.props.pageSize)
+            .then(data => {
                 this.props.toggleFetching(false);
-                this.props.setUsers(response.data.items);
+                this.props.setUsers(data.items);
             })
     }
     render() {
