@@ -1,3 +1,5 @@
+import usersAPI from "../api/usersAPI";
+
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
@@ -44,7 +46,6 @@ const usersReducer = (state = initialState, action) => {
                 })
             }
         case SET_USERS:
-
             return {
                 ...state,
                 users: [...action.users]
@@ -75,13 +76,46 @@ const usersReducer = (state = initialState, action) => {
     }
 }
 
-export const follow = (userId) => ({type: FOLLOW, userId});
-export const unfollow = (userId) => ({type: UNFOLLOW, userId});
+const followSuccess = (userId) => ({type: FOLLOW, userId});
+const unfollowSuccess = (userId) => ({type: UNFOLLOW, userId});
 export const setUsers = (users) => ({type: SET_USERS, users});
 export const setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage});
 export const setTotalUserCount = (totalUsersCount) => ({type: SET_TOTAL_USER_COUNT, totalUsersCount});
 export const toggleFetching = (isFetching) => ({type: TOGGLE_FETCHING, isFetching});
-export const toggleFollowingProgress = (isFetching,userId) => ({type: TOGGLE_FOLLOWING_PROGRESS, isFetching,userId});
+export const toggleFollowingProgress = (isFetching, userId) => ({type: TOGGLE_FOLLOWING_PROGRESS, isFetching, userId});
 
+export const follow = (userId) => (dispatch) => {
+    dispatch(toggleFollowingProgress(true, userId));
+    usersAPI.follow(userId)
+        .then(data => {
+            if (data.resultCode === 0) {
+                dispatch(followSuccess(userId));
+            }
+            dispatch(toggleFollowingProgress(false, userId));
+        })
+}
+
+export const unfollow = (userId) => (dispatch) => {
+    dispatch(toggleFollowingProgress(true, userId));
+    usersAPI.unfollow(userId)
+        .then(data => {
+            if (data.resultCode === 0) {
+                dispatch(unfollowSuccess(userId));
+            }
+            dispatch(toggleFollowingProgress(false, userId));
+        })
+}
+
+
+export const getUsers = (currentPage,pageSize) => (dispatch) => {
+    dispatch(setCurrentPage(currentPage));
+    dispatch(toggleFetching(true));
+    usersAPI.getUsers(currentPage,pageSize)
+        .then(data => {
+            dispatch(toggleFetching(false));
+            dispatch(setUsers(data.items));
+            dispatch(setTotalUserCount(data.totalCount));
+        })
+}
 
 export default usersReducer;

@@ -1,34 +1,21 @@
 import {connect} from "react-redux";
 import {
-    follow,
+    follow, getUsers,
     setCurrentPage,
     setTotalUserCount,
     setUsers,
-    toggleFetching, toggleFollowingProgress,
+    toggleFetching,
     unfollow
 } from "../../redux/users-reducer";
 import Users from "./Users";
 import React from "react";
-import usersAPI from "../../api/usersAPI";
 
 class UsersContainer extends React.Component {
     componentDidMount() {
-        this.props.toggleFetching(true);
-        usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
-            .then(data => {
-                    this.props.toggleFetching(false);
-                    this.props.setUsers(data.items);
-                    this.props.setTotalUserCount(data.totalCount);
-                })
+        this.props.getUsers(this.props.currentPage, this.props.pageSize);
     }
     onPageChanged = (currentPage) => {
-        this.props.setCurrentPage(currentPage);
-        this.props.toggleFetching(true);
-        usersAPI.getUsers(currentPage,this.props.pageSize)
-            .then(data => {
-                this.props.toggleFetching(false);
-                this.props.setUsers(data.items);
-            })
+        this.props.getUsers(currentPage, this.props.pageSize);
     }
 
     render() {
@@ -42,7 +29,6 @@ class UsersContainer extends React.Component {
                    onPageChanged={this.onPageChanged}
                    isFetching={this.props.isFetching}
                    followingInProgress ={this.props.followingInProgress}
-                   toggleFollowingProgress ={this.props.toggleFollowingProgress}
             />
         )
     }
@@ -59,6 +45,6 @@ let mapStateToProps = (state) => {
     }
 }
 
-let mapDispatchToProps = {follow, unfollow, setUsers, setCurrentPage, setTotalUserCount, toggleFetching,toggleFollowingProgress};
+let mapDispatchToProps = {follow, unfollow, setUsers, setCurrentPage, setTotalUserCount, toggleFetching,getUsers};
 
 export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
