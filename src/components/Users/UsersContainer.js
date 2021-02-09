@@ -50,6 +50,6 @@ let mapStateToProps = (state) => {
 let mapDispatchToProps = {follow, unfollow, setUsers, setCurrentPage, setTotalUserCount, toggleFetching,getUsers};
 
 export default compose(
-    withAuthRedirect,
     connect(mapStateToProps, mapDispatchToProps),
+    withAuthRedirect,
 )(UsersContainer)

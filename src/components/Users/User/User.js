@@ -15,10 +15,10 @@ let User = (props) => {
             <div>
                 {props.user.followed
                     ? <button disabled={props.followingInProgress.some(u=>u===props.user.id)} onClick={
-                        () => {this.props.unfollow(this.props.user.id);}
+                        () => {props.unfollow(props.user.id);}
                     }>Unfollow</button>
                     : <button disabled={props.followingInProgress.some(u=>u===props.user.id)} onClick={
-                        () => {this.props.follow(this.props.user.id);}
+                        () => {props.follow(props.user.id);}
                     }>Follow</button>}
             </div>
             <div>{props.user.name}</div>
