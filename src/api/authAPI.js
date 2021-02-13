@@ -1,7 +1,7 @@
 import instance from "./instance";
 
 const authAPI = {
-    authenticate: () => {
+    authMe: () => {
         return (
             instance.get(`auth/me`)
                 .then(response => response.data)

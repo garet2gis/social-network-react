@@ -35,8 +35,8 @@ export const setUserAuthData = (data) => ({type: SET_USER_AUTH_DATA, data});
 export const setLoginData = (id) => ({type: LOGIN_TO_APP, id});
 
 
-export const authenticate = () => (dispatch) => {
-    authAPI.authenticate()
+export const authMe = () => (dispatch) => {
+    authAPI.authMe()
         .then(data => {
             if (data.resultCode === 0)
                 dispatch(setUserAuthData(data.data));
@@ -47,7 +47,7 @@ export const login = (loginData) => (dispatch) => {
     authAPI.login(loginData)
         .then(data => {
             if (data.resultCode === 0)
-                dispatch(authenticate());
+                dispatch(authMe());
         })
 };
 

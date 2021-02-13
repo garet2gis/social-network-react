@@ -3,17 +3,29 @@ import {Field, reduxForm} from 'redux-form';
 import {login} from "../../redux/auth-reducer";
 import {connect} from "react-redux";
 
+const Login = (props) => {
+    let onSubmit = (data) => {
+        props.login(data);
+    }
+    return (
+        <div>
+            <h1>Login</h1>
+            <LoginReduxForm onSubmit={onSubmit}/>
+        </div>
+    )
+}
+
 const LoginForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field placeholder={'Email'} name = 'email' component='input'/>
+                <Field placeholder={'Email'} name='email' component='input'/>
             </div>
             <div>
-                <Field placeholder={'Password'} name = 'password' component='input'/>
+                <Field placeholder={'Password'} name='password' component='input'/>
             </div>
             <div>
-                <Field type={'checkbox'} name = 'rememberMe' component='input'/> remember me
+                <Field type={'checkbox'} name='rememberMe' component='input'/> remember me
             </div>
             <div>
                 <button>Login</button>
@@ -24,21 +36,6 @@ const LoginForm = (props) => {
 
 const LoginReduxForm = reduxForm({form: 'login'})(LoginForm)
 
+let mapStateToProps = () => ({})
 
-
-const Login = (props) => {
-    let onSubmit = (data) =>{
-        console.log(data);
-        props.login(data);
-    }
-    return (
-        <>
-            <h1>Login</h1>
-            <LoginReduxForm onSubmit = {onSubmit}/>
-        </>
-    )
-}
-
-let mapStateToProps = (state) => ({})
-
-export default connect(mapStateToProps,{login})(Login);
+export default connect(mapStateToProps, {login})(Login);

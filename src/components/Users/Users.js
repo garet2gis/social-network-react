@@ -10,7 +10,7 @@ let Users = (props) => {
     for (let i = 1; i <= pagesCount; i++) pages.push(i);
     let users = props.users.map(u => <User key={u.id} user={u} follow={props.follow}
                                            unfollow={props.unfollow}
-                                           followingInProgress ={props.followingInProgress}
+                                           followingInProgress={props.followingInProgress}
     />);
     return (
         <div>
@@ -27,7 +27,6 @@ let Users = (props) => {
             {users}
         </div>
     )
-
 }
 
 export default Users;
