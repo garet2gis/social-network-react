@@ -18,8 +18,7 @@ export let renderEntireTree = () => {
             </Provider>
         </BrowserRouter>,
         document.getElementById('root')
-    )
-    ;
+    );
 }
 
 renderEntireTree();

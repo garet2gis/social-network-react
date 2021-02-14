@@ -2,6 +2,9 @@ import React from 'react';
 import {Field, reduxForm} from 'redux-form';
 import {login} from "../../redux/auth-reducer";
 import {connect} from "react-redux";
+import {FormControl} from "../common/FormsControls/FormsControls";
+import {maxLengthCreator, required} from "../../utils/validators/validators";
+import {Redirect} from "react-router-dom";
 
 const Login = (props) => {
     let onSubmit = (data) => {
@@ -15,14 +18,21 @@ const Login = (props) => {
     )
 }
 
+const Input = FormControl('input');
+const maxLength20 = maxLengthCreator(20);
+
+
 const LoginForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field placeholder={'Email'} name='email' component='input'/>
+                <Field placeholder={'Email'} name='email' component={Input}
+                       validate={[required, maxLength20]}/>
             </div>
             <div>
-                <Field placeholder={'Password'} name='password' component='input'/>
+                <Field placeholder={'Password'} name='password' component={Input}
+                       type = 'password'
+                       validate={[required, maxLength20]}/>
             </div>
             <div>
                 <Field type={'checkbox'} name='rememberMe' component='input'/> remember me
