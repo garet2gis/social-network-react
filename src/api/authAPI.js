@@ -12,6 +12,12 @@ const authAPI = {
             instance.post(`auth/login`,loginData)
                 .then(response => response.data)
         )
+    },
+    logout: () => {
+        return (
+            instance.delete(`auth/login`)
+                .then(response => response.data)
+        )
     }
 }
 export default authAPI;

@@ -7,6 +7,10 @@ import {maxLengthCreator, required} from "../../utils/validators/validators";
 import {Redirect} from "react-router-dom";
 
 const Login = (props) => {
+
+    if (props.isAuth){
+        return <Redirect to = '/Profile'/>
+    }
     let onSubmit = (data) => {
         props.login(data);
     }
@@ -46,6 +50,8 @@ const LoginForm = (props) => {
 
 const LoginReduxForm = reduxForm({form: 'login'})(LoginForm)
 
-let mapStateToProps = () => ({})
+let mapStateToProps = (state) => ({
+    isAuth: state.auth.isAuth
+})
 
 export default connect(mapStateToProps, {login})(Login);
