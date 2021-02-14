@@ -8,7 +8,6 @@ import {Redirect} from "react-router-dom";
 import classes from "../common/FormsControls/FormsControls.module.css"
 
 const Login = (props) => {
-
     if (props.isAuth) {
         return <Redirect to='/Profile'/>
     }
