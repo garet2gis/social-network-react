@@ -5,11 +5,12 @@ import {connect} from "react-redux";
 import {FormControl} from "../common/FormsControls/FormsControls";
 import {maxLengthCreator, required} from "../../utils/validators/validators";
 import {Redirect} from "react-router-dom";
+import classes from "../common/FormsControls/FormsControls.module.css"
 
 const Login = (props) => {
 
-    if (props.isAuth){
-        return <Redirect to = '/Profile'/>
+    if (props.isAuth) {
+        return <Redirect to='/Profile'/>
     }
     let onSubmit = (data) => {
         props.login(data);
@@ -35,12 +36,15 @@ const LoginForm = (props) => {
             </div>
             <div>
                 <Field placeholder={'Password'} name='password' component={Input}
-                       type = 'password'
+                       type='password'
                        validate={[required, maxLength20]}/>
             </div>
             <div>
                 <Field type={'checkbox'} name='rememberMe' component='input'/> remember me
             </div>
+
+            {props.error && <div className={classes.formSummaryError}>{props.error}</div>}
+
             <div>
                 <button>Login</button>
             </div>
