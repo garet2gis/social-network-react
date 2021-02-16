@@ -2,7 +2,6 @@ import authAPI from "../api/authAPI";
 import {stopSubmit} from "redux-form";
 
 const SET_USER_AUTH_DATA = 'SET_USER_AUTH_DATA';
-
 const DELETE_USER_AUTH_DATA = 'DELETE_USER_AUTH_DATA';
 
 const initialState = {

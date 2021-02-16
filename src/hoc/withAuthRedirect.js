@@ -3,8 +3,6 @@ import {Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 
 
-// TODO: `need to fix bug wth redirect
-
 const mapStateToProps = (state) => ({
     isAuth: state.auth.isAuth
 })

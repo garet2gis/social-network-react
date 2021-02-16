@@ -107,7 +107,7 @@ export const unfollow = (userId) => (dispatch) => {
 }
 
 
-export const getUsers = (currentPage,pageSize) => (dispatch) => {
+export const requestUsers = (currentPage, pageSize) => (dispatch) => {
     dispatch(setCurrentPage(currentPage));
     dispatch(toggleFetching(true));
     usersAPI.getUsers(currentPage,pageSize)
