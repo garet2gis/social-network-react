@@ -6,12 +6,12 @@ import {Field, reduxForm} from "redux-form";
 import {FormControl} from "../common/FormsControls/FormsControls";
 import {maxLengthCreator, required} from "../../utils/validators/validators";
 
-const Dialogs = (props) => {
-    let dialogElements = props.dialogs.map(d => <DialogItem id={d.id} name={d.name}/>);
-    let messageElements = props.messages.map(m => <Message id={m.id} message={m.message}/>);
+const Dialogs = ({dialogs,messages,addMessage}) => {
+    let dialogElements = dialogs.map(d => <DialogItem key = {d.id} id={d.id} name={d.name}/>);
+    let messageElements = messages.map(m => <Message  key = {m.id} id={m.id} message={m.message}/>);
 
     let onSubmit = (data) => {
-        props.addMessage(data.message);
+        addMessage(data.message);
     }
     return (
         <div className={classes.dialogs}>
@@ -25,6 +25,7 @@ const Dialogs = (props) => {
         </div>
     )
 }
+
 const Textarea = FormControl('textarea');
 const maxLength50 = maxLengthCreator(50);
 

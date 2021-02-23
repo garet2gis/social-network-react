@@ -1,6 +1,5 @@
 import profileReducer, {addPost, deletePost} from "./profile-reducer";
 
-
 const initialState = {
     posts: [
         {id: 1, message: 'hey, friend', likesCount: 228},
