@@ -4,16 +4,17 @@ import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import React from "react";
-import {Route} from "react-router-dom";
+import {HashRouter, Route} from "react-router-dom";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
-import {connect} from "react-redux";
+import {connect, Provider} from "react-redux";
 import {initialize} from "./redux/app-reducer";
 import {compose} from "redux";
 import Preloader from "./components/common/Preloader/Preloader";
+import store from "./redux/redux-store";
 
 class App extends React.Component {
     componentDidMount() {
@@ -48,6 +49,19 @@ const mapStateToProps = (state) => ({
     isInitialized: state.app.isInitialized
 })
 
-export default compose(
+
+const AppContainer = compose(
     connect(mapStateToProps, {initialize})
 )(App);
+
+const MainApp = () => {
+    return (
+        <HashRouter>
+            <Provider store={store}>
+                <AppContainer/>
+            </Provider>
+        </HashRouter>
+    )
+}
+
+export default MainApp;
