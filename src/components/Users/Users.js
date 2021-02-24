@@ -11,10 +11,12 @@ let Users = (props) => {
     return (
         <div>
             {props.isFetching ? <Preloader/> : null}
-            <Pagination totalUsersCount={props.totalUsersCount}
+            <Pagination totalItemsCount={props.totalUsersCount}
                         pageSize={props.pageSize}
                         currentPage={props.currentPage}
-                        onPageChanged={props.onPageChanged}/>
+                        onPageChanged={props.onPageChanged}
+                        portionSize = {20}
+            />
             {users}
         </div>
     )
