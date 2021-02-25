@@ -5,12 +5,12 @@ const ProfileStatus = (props) => {
     let [editMode, setEditMode] = useState(false);
     let [status, setStatus] = useState(props.status);
 
-    useEffect(()=>{
+    useEffect(() => {
         setStatus(props.status);
-    },[props.status])
+    }, [props.status])
 
     const activateEditMode = () => {
-        setEditMode(true)
+        props.isOwner && setEditMode(true);
     }
     const deactivateEditMode = () => {
         setEditMode(false);
@@ -19,6 +19,7 @@ const ProfileStatus = (props) => {
     const onStatusChange = (e) => {
         setStatus(e.currentTarget.value)
     }
+
     return (
         <div>
             {!editMode &&
