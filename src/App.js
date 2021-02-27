@@ -4,7 +4,7 @@ import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import React from "react";
-import {HashRouter, Route} from "react-router-dom";
+import {Redirect, Switch, HashRouter, Route} from "react-router-dom";
 //import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
@@ -33,14 +33,18 @@ class App extends React.Component {
                 <HeaderContainer/>
                 <Navbar/>
                 <div className={'app-wrapper-content'}>
-                    <Route path='/dialogs' render={withSuspense(DialogsContainer)}/>
-                    <Route path='/profile/:userId?'
-                           render={() => <ProfileContainer/>}/>
-                    <Route path='/news' render={() => <News/>}/>
-                    <Route path='/music' render={() => <Music/>}/>
-                    <Route path='/settings' render={() => <Settings/>}/>
-                    <Route path='/users' render={() => <UsersContainer/>}/>
-                    <Route path='/login' render={() => <Login/>}/>
+                    <Switch>
+                        <Route path='/dialogs' render={withSuspense(DialogsContainer)}/>
+                        <Route path='/profile/:userId?'
+                               render={() => <ProfileContainer/>}/>
+                        <Route path='/news' render={() => <News/>}/>
+                        <Route path='/music' render={() => <Music/>}/>
+                        <Route path='/settings' render={() => <Settings/>}/>
+                        <Route path='/users' render={() => <UsersContainer/>}/>
+                        <Route path='/login' render={() => <Login/>}/>
+                        <Redirect exact from="/" to="/profile" />
+                        <Route path='*' render={() => <div>404 NOT FOUND</div>}/>
+                    </Switch>
                 </div>
             </div>
         );
