@@ -8,12 +8,14 @@ import styled from "styled-components";
 
 export const ChangeAvatarButton = styled.label`
     position: absolute;
-    top:0;
-    right:0;
+    bottom:5%;
+    left: 50%;
+    font-size: 100%;
+    padding: 4px;
+    width: 40%;
+    margin-left:-20%;
     background-color: #555;
     color: lightgrey;
-    font-size: 16px;
-    padding: 1vh;
     display: block;
     border: none;
     cursor: pointer;
@@ -29,18 +31,17 @@ export const ChangeAvatarButton = styled.label`
         color: white;
         transition: 0.2s;
     }
-    bottom: 15px;
-    right: 15px;
+    
 `
 
 export const Avatar = styled.div`
     position: relative;
     display: inline-block;
     line-height: 0;
-    max-width: 100%;
+    min-width: 200px;
     img{
         width: 100%;
-        height: auto;
+        
     }
     :hover ${ChangeAvatarButton}{
             transition: 0.3s;
@@ -48,23 +49,25 @@ export const Avatar = styled.div`
     }
 `
 
-
-export const ProfileWrapper = styled.div`
-    display: flex;
-    margin-top:10px;
+export const LeftColumn = styled.div`
+    flex: 0 0 40%;
     @media ${props => props.theme.media.phone}{
-        flex-direction: column;
+            flex: 0 0 100%;
     }
 `
-
-export const LeftColumn = styled.div`
-    flex: 0 0 35%;
-`
 export const RightColumn = styled.div`
-    flex: 0 0 65%;
-    margin-left: 20px;
+    flex: 0 0 50%;
+    justify-self: center;
     @media ${props => props.theme.media.phone}{
-        margin-left: 0px;
+            flex: 0 0 100%;
+    }
+`
+export const ProfileWrapper = styled.div`
+    display: flex;
+    flex-wrap:wrap;
+    margin-top:10px;
+    ${LeftColumn} + ${RightColumn} {
+        margin-left: 10px;
     }
 `
 
@@ -91,35 +94,33 @@ const ProfileInfo = ({profile, savePhoto, isOwner, status, updateUserStatus, edi
     }
 
     return (
-        <div>
-            <div>
-                <ProfileWrapper>
-                    <LeftColumn>
-                        <Avatar>
-                            <img src={profile.photos.large ? profile.photos.large : userAsset}
-                                 alt='avatar'/>
-                            {isOwner &&
-                            <ChangeAvatarButton>
-                                <input type={'file'} onChange={onSavePhoto}/>
-                            </ChangeAvatarButton>
-                            }
-                        </Avatar>
-                    </LeftColumn>
+        <ProfileWrapper>
+            <LeftColumn>
+                <Avatar>
+                    <img src={profile.photos.large ? profile.photos.large : userAsset}
+                         alt='avatar'/>
+                    {isOwner &&
+                    <ChangeAvatarButton>
+                        <input type={'file'} onChange={onSavePhoto}/>Change photo
+                    </ChangeAvatarButton>
+                    }
+                </Avatar>
+            </LeftColumn>
 
-                    <RightColumn>
-                    <div>
-                        {!(editMode) &&
-                        <ProfileTextInfo profile={profile} setEditMode={setEditMode} isOwner={isOwner} status={status} updateUserStatus={updateUserStatus}/>}
-                        {(editMode) &&
-                        <ProfileTextInfoForm initialValues={profile} onSubmit={onSubmit} profile={profile}
-                                             isOwner={isOwner}
-                                             cancelSubmit={disableEditMode}/>}
-                    </div>
-                    </RightColumn>
-                </ProfileWrapper>
+            <RightColumn>
+                <StyledFullName>
+                    {profile.fullName}
+                </StyledFullName>
+                <ProfileStatus status={status} updateUserStatus={updateUserStatus} isOwner={isOwner}/>
+                <hr/>
+                <ProfileTextInfo profile={profile} setEditMode={setEditMode} isOwner={isOwner}/>
 
-            </div>
-        </div>
+                {(editMode) &&
+                <ProfileTextInfoForm initialValues={profile} onSubmit={onSubmit} profile={profile}
+                                     isOwner={isOwner}
+                                     cancelSubmit={disableEditMode}/>}
+            </RightColumn>
+        </ProfileWrapper>
     )
 }
 
@@ -127,23 +128,34 @@ export const StyledFullName = styled.div`
     font-size: 22px;
 `
 
+export const StyledInfoItem = styled.div`
+    display:flex;
+`
+export const StyledTag = styled.div`
+    flex: 0 0 40%;
+    font-weight: bold;
+`
+export const StyledInfo = styled.div`
+    flex: 1 0 60%;
+`
 
-const ProfileTextInfo = ({profile, setEditMode, isOwner,status,updateUserStatus}) => {
+
+const ProfileTextInfo = ({profile, setEditMode, isOwner}) => {
     return <div>
-        <StyledFullName>
-            {profile.fullName}
-        </StyledFullName>
-        <ProfileStatus status={status} updateUserStatus={updateUserStatus} isOwner={isOwner}/>
-        <div>
-            About me: {profile.aboutMe}
-        </div>
-        <div>
-            Looking for a job: {profile.lookingForAJob ? 'yes' : 'no'}
-        </div>
+        <StyledInfoItem>
+            <StyledTag>About me:</StyledTag>
+            <StyledInfo>{profile.aboutMe}</StyledInfo>
+        </StyledInfoItem>
+        <StyledInfoItem>
+            <StyledTag>Looking for a job: </StyledTag>
+            <StyledInfo>{profile.lookingForAJob ? 'yes' : 'no'}</StyledInfo>
+        </StyledInfoItem>
         {profile.lookingForAJob &&
-        <div>
-            Work preferences: {profile.lookingForAJobDescription}
-        </div>}
+        <StyledInfoItem>
+            <StyledTag>Work preferences: </StyledTag>
+            <StyledInfo>{profile.lookingForAJobDescription}</StyledInfo>
+        </StyledInfoItem>}
+        <hr/>
         <div>
             Contacts: {Object.keys(profile.contacts).map(key => {
             return (
@@ -160,9 +172,14 @@ const ProfileTextInfo = ({profile, setEditMode, isOwner,status,updateUserStatus}
 
 
 const Contact = ({contactType, contactInfo}) => {
-    return (<div>
-            {contactType}: {contactInfo}
-        </div>
+    return (<StyledInfoItem>
+            {contactInfo &&
+            <>
+                <StyledTag>{contactType}: </StyledTag>
+                <StyledInfo>{contactInfo}</StyledInfo>
+            </>
+            }
+        </StyledInfoItem>
     )
 }
 

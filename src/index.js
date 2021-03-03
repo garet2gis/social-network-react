@@ -33,7 +33,8 @@ const Global = createGlobalStyle`
 
 const theme = {
     media:{
-        phone: "(max-width: 900px)"
+        phone: "(max-width: 660px)",
+        tablet: "(max-width: 900px) and (min-width:660px)"
     }
 }
 
