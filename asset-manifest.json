@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/social-network-react/static/css/main.efb2ff31.chunk.css",
-    "main.js": "/social-network-react/static/js/main.47527da8.chunk.js",
-    "main.js.map": "/social-network-react/static/js/main.47527da8.chunk.js.map",
+    "main.js": "/social-network-react/static/js/main.9743ae80.chunk.js",
+    "main.js.map": "/social-network-react/static/js/main.9743ae80.chunk.js.map",
     "runtime-main.js": "/social-network-react/static/js/runtime-main.ce12ddce.js",
     "runtime-main.js.map": "/social-network-react/static/js/runtime-main.ce12ddce.js.map",
     "static/js/2.2ab04cfa.chunk.js": "/social-network-react/static/js/2.2ab04cfa.chunk.js",
@@ -17,12 +17,12 @@
     "static/css/main.efb2ff31.chunk.css.map": "/social-network-react/static/css/main.efb2ff31.chunk.css.map",
     "static/js/2.2ab04cfa.chunk.js.LICENSE.txt": "/social-network-react/static/js/2.2ab04cfa.chunk.js.LICENSE.txt",
     "static/media/loader.fd8746b8.svg": "/social-network-react/static/media/loader.fd8746b8.svg",
-    "static/media/userAsset.73a0bc1f.png": "/social-network-react/static/media/userAsset.73a0bc1f.png"
+    "static/media/userAsset3.9fd9547f.svg": "/social-network-react/static/media/userAsset3.9fd9547f.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.ce12ddce.js",
     "static/js/2.2ab04cfa.chunk.js",
     "static/css/main.efb2ff31.chunk.css",
-    "static/js/main.47527da8.chunk.js"
+    "static/js/main.9743ae80.chunk.js"
   ]
 }
