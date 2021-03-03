@@ -6,7 +6,10 @@ const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
 const DELETE_POST = 'DELETE_POST';
 const SAVE_PHOTO_SUCCESS = 'SAVE_PHOTO_SUCCESS';
-const TOGGLE_EDIT_MODE = 'TOGGLE_EDIT_MODE';
+
+const SET_EDIT_MODE = 'SET_EDIT_MODE';
+const DISABLE_EDIT_MODE = 'DISABLE_EDIT_MODE';
+
 const SAVE_PROFILE_SUCCESS = 'SAVE_PROFILE_SUCCESS';
 
 const initialState = {
@@ -47,10 +50,16 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 profile: {...state.profile, photos: action.photos}
             }
-        case TOGGLE_EDIT_MODE:
+
+        case SET_EDIT_MODE:
             return {
                 ...state,
-                editMode: !state.editMode
+                editMode: true
+            }
+        case DISABLE_EDIT_MODE:
+            return {
+                ...state,
+                editMode: false
             }
         case SAVE_PROFILE_SUCCESS:
             return {
@@ -80,8 +89,11 @@ export const deletePost = (postId) =>
 export const savePhotoSuccess = (photos) =>
     ({type: SAVE_PHOTO_SUCCESS, photos});
 
-export const toggleEditMode = () =>
-    ({type: TOGGLE_EDIT_MODE});
+export const setEditMode = () =>
+    ({type: SET_EDIT_MODE});
+
+export const disableEditMode = () =>
+    ({type: DISABLE_EDIT_MODE});
 
 export const getProfile = (userId) => async (dispatch) => {
     const data = await profileAPI.getProfile(userId);
@@ -98,8 +110,7 @@ export const updateUserStatus = (status) => async (dispatch) => {
         const data = await profileAPI.updateStatus(status);
         if (data.resultCode === 0)
             dispatch(setStatus(status));
-    }
-    catch (error){
+    } catch (error) {
         alert("Error with status");
     }
 }
@@ -112,14 +123,13 @@ export const saveProfile = (profile) => async (dispatch) => {
     const data = await profileAPI.saveProfile(profile);
     if (data.resultCode === 0) {
         dispatch(saveProfileSuccess(profile));
-        dispatch(toggleEditMode())
-    }
-    else{
+        dispatch(disableEditMode())
+    } else {
         let wrongField = data.messages[0]
             .slice(data.messages[0].indexOf(">") + 1,
                 data.messages[0].indexOf(")"))
             .toLocaleLowerCase();
-        dispatch(stopSubmit('profileEditForm', {contacts:{[wrongField]:data.messages[0]}}));
+        dispatch(stopSubmit('profileEditForm', {contacts: {[wrongField]: data.messages[0]}}));
     }
 }
 

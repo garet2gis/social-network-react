@@ -1,4 +1,17 @@
 import React, {useEffect, useState} from 'react';
+import styled from "styled-components";
+
+export const StyledProfileStatus = styled.div`
+    font-size: 14px;
+    min-height: 30px;
+    
+    :hover span{
+        color:grey;
+        cursor: pointer;
+    }
+    
+`
+
 
 const ProfileStatus = (props) => {
 
@@ -21,17 +34,17 @@ const ProfileStatus = (props) => {
     }
 
     return (
-        <div>
+        <StyledProfileStatus>
             {!editMode &&
             <div>
-                <span onDoubleClick={activateEditMode}>{props.status || '----'}</span>
+                <span onClick={activateEditMode}>{props.status || '----'}</span>
             </div>}
 
             {editMode &&
             <div>
                 <input onChange={onStatusChange} onBlur={deactivateEditMode} autoFocus={true} value={status}/>
             </div>}
-        </div>
+        </StyledProfileStatus>
     )
 }
 

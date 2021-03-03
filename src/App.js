@@ -25,7 +25,6 @@ class App extends React.Component {
     catchAllUnhandledErrors = (reason, promise) => {
         alert(reason.message);
     }
-
     componentDidMount() {
         this.props.initialize();
         window.addEventListener("unhandledrejection", this.catchAllUnhandledErrors);
@@ -34,7 +33,6 @@ class App extends React.Component {
     componentWillUnmount() {
         window.removeEventListener("unhandledrejection", this.catchAllUnhandledErrors);
     }
-
     render() {
         if (!this.props.isInitialized) {
             return <Preloader/>

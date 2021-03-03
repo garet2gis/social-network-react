@@ -8,14 +8,16 @@ let Users = (props) => {
                                            unfollow={props.unfollow}
                                            followingInProgress={props.followingInProgress}
     />);
+    if (props.isFetching) {
+        return <Preloader/>;
+    }
     return (
         <div>
-            {props.isFetching ? <Preloader/> : null}
             <Pagination totalItemsCount={props.totalUsersCount}
                         pageSize={props.pageSize}
                         currentPage={props.currentPage}
                         onPageChanged={props.onPageChanged}
-                        portionSize = {20}
+                        portionSize={20}
             />
             {users}
         </div>

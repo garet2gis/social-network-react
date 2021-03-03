@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import classes from './Pagination.module.css'
 import classNames from 'classnames'
 
@@ -12,6 +12,11 @@ let Pagination = ({totalItemsCount, pageSize, currentPage, onPageChanged, portio
 
     let portionsCount = Math.ceil(pagesCount / portionSize);
     let [portionNumber, setPortionNumber] = useState(1);
+
+    useEffect(() => {
+        let currentPortion = Math.ceil(currentPage / portionSize);
+        setPortionNumber(currentPortion);
+    }, [currentPage, portionSize]);
 
     let leftPortionPageNumber = ((portionNumber - 1) * portionSize) + 1;
     let rightPortionPageNumber = portionNumber * portionSize;

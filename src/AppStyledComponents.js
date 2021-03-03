@@ -19,8 +19,10 @@ export const FlexContainer = styled.div`
     margin-right: -15px;
     margin-left: -15px;
     flex-grow: 1; 
+    @media ${props => props.theme.media.phone}{
+        flex-direction: column;
+    }
 `
-
 
 export const FlexItemContent = styled.div`
     position: relative;
@@ -31,7 +33,7 @@ export const FlexItemContent = styled.div`
     max-width: 80%;
     background: lemonchiffon;
     @media ${props => props.theme.media.phone}{
-        flex: 0 0 100%;
+        flex: 1 0 100%;
         max-width: 100%;
     }
 `

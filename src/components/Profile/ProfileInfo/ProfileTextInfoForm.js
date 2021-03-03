@@ -6,13 +6,16 @@ import classes from "../../common/FormsControls/FormsControls.module.css";
 const Input = FormControl('input');
 const Textarea = FormControl('textarea');
 
-const ProfileTextInfoForm = ({profile,  isOwner,handleSubmit, error}) => {
+const ProfileTextInfoForm = ({profile, isOwner, handleSubmit, error, cancelSubmit}) => {
     return (
         <form onSubmit={handleSubmit}>
             {isOwner &&
             <div>
                 <button>Save</button>
             </div>}
+            <button type="button" onClick={cancelSubmit}>
+                Cancel
+            </button>
             {error &&
             <div className={classes.formSummaryError}>{error}</div>}
 
@@ -29,16 +32,17 @@ const ProfileTextInfoForm = ({profile,  isOwner,handleSubmit, error}) => {
             <div>
                 Looking for a job:
                 <Field name='lookingForAJob' component='input'
-                       validate={[]} type = 'checkbox'/>
+                       validate={[]} type='checkbox'/>
             </div>
             <div>
-                Work preferences: <Field placeholder={'work preferences'} name='lookingForAJobDescription' component={Textarea}
+                Work preferences: <Field placeholder={'work preferences'} name='lookingForAJobDescription'
+                                         component={Textarea}
                                          validate={[]}/>
             </div>
             <div>
                 Contacts: {Object.keys(profile.contacts).map(key => {
                 return (
-                    <div key ={key}>
+                    <div key={key}>
                         {key}: <Field placeholder={key} name={`contacts.${key}`} component={Input} validate={[]}/>
                     </div>
                 )
