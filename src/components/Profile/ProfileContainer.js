@@ -33,8 +33,10 @@ class ProfileContainer extends React.Component {
                 history.push('/login');
             }
         }
-        getProfile(userId);
-        setUserStatus(userId);
+        if (userId) {
+            getProfile(userId);
+            setUserStatus(userId);
+        }
     }
 
     render() {
