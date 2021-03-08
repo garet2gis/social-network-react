@@ -27,7 +27,6 @@ export const FlexContainer = styled.div`
 `
 
 export const FlexItemContent = styled.div`
-    
     width: 100%;
     padding-right: 15px;
     padding-left: 15px;

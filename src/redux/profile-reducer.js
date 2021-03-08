@@ -14,9 +14,9 @@ const SAVE_PROFILE_SUCCESS = 'SAVE_PROFILE_SUCCESS';
 
 const initialState = {
     posts: [
-        {id: 1, message: 'hey, nibba', likesCount: 228},
-        {id: 2, message: 'get the fuck out', likesCount: 9},
-        {id: 3, message: 'It is my first post', likesCount: 3}
+        {id: 1, message: 'It is my first post', likesCount: 18},
+        {id: 2, message: 'hello there', likesCount: 9},
+        {id: 3, message: 'why am i posting this?', likesCount: 3}
     ],
     profile: null,
     status: 'default status',

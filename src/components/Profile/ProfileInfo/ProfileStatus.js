@@ -1,16 +1,15 @@
 import React, {useEffect, useState} from 'react';
-import styled from "styled-components";
+import styled, {css} from "styled-components";
 import {StyledInput} from "../../styled/StyledInput";
 
 
 export const StyledProfileStatus = styled.span`
     font-size: 14px;
-    min-height: 40px;
-    :hover{
-        cursor: pointer;
-        color:grey;
-    }
+    
 `
+
+
+
 export const StyledEditModeStatus = styled(StyledInput)`
     min-height: 40px;
     input{
@@ -20,9 +19,20 @@ export const StyledEditModeStatus = styled(StyledInput)`
         background-color: #e4eff0;
     }
 `
-export const StyledStatus = styled(StyledInput)`
-    min-height: 40px;
+export const StyledStaticStatus = styled.div`
+    min-height:40px;
+    ${(props) => props.isOwner &&
+    css`
+    span{
+           :hover{
+               cursor: pointer;
+               color:grey;
+           }
+           }
+        `}
+    
 `
+
 const ProfileStatus = (props) => {
 
     let [editMode, setEditMode] = useState(false);
@@ -46,7 +56,9 @@ const ProfileStatus = (props) => {
     return (
         <StyledProfileStatus>
             {!editMode &&
-                <StyledStatus onClick={activateEditMode}>{props.status || '----'}</StyledStatus>
+            <StyledStaticStatus isOwner={props.isOwner}>
+                <span onClick={activateEditMode}>{props.status || '----'}</span>
+            </StyledStaticStatus>
             }
             {editMode &&
             <StyledEditModeStatus>
