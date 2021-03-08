@@ -9,7 +9,7 @@ import classes from "../common/FormsControls/FormsControls.module.css"
 
 const Login = (props) => {
     if (props.isAuth) {
-        return <Redirect to='/Profile'/>
+        return <Redirect to='/profile'/>
     }
     let onSubmit = (data) => {
         props.login(data);

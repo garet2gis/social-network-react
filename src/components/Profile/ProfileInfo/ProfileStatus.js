@@ -1,18 +1,28 @@
 import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
+import {StyledInput} from "../../styled/StyledInput";
 
-export const StyledProfileStatus = styled.div`
+
+export const StyledProfileStatus = styled.span`
     font-size: 14px;
-    min-height: 30px;
-    
-    :hover span{
-        color:grey;
+    min-height: 40px;
+    :hover{
         cursor: pointer;
+        color:grey;
     }
-    
 `
-
-
+export const StyledEditModeStatus = styled(StyledInput)`
+    min-height: 40px;
+    input{
+        font-size:14px;
+        height: 25px;
+        min-height: 25px;
+        background-color: #e4eff0;
+    }
+`
+export const StyledStatus = styled(StyledInput)`
+    min-height: 40px;
+`
 const ProfileStatus = (props) => {
 
     let [editMode, setEditMode] = useState(false);
@@ -36,14 +46,12 @@ const ProfileStatus = (props) => {
     return (
         <StyledProfileStatus>
             {!editMode &&
-            <div>
-                <span onClick={activateEditMode}>{props.status || '----'}</span>
-            </div>}
-
+                <StyledStatus onClick={activateEditMode}>{props.status || '----'}</StyledStatus>
+            }
             {editMode &&
-            <div>
+            <StyledEditModeStatus>
                 <input onChange={onStatusChange} onBlur={deactivateEditMode} autoFocus={true} value={status}/>
-            </div>}
+            </StyledEditModeStatus>}
         </StyledProfileStatus>
     )
 }

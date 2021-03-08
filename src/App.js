@@ -15,7 +15,7 @@ import Preloader from "./components/common/Preloader/Preloader";
 import store from "./redux/redux-store";
 import withSuspense from "./hoc/withSuspense";
 import Footer from "./components/Footer/Footer";
-import {AppWrapper, FlexContainer, FlexItemContent} from "./AppStyledComponents";
+import {AppWrapper, FlexContainer, FlexItemContent} from "./AppStyled";
 
 
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
@@ -25,6 +25,7 @@ class App extends React.Component {
     catchAllUnhandledErrors = (reason, promise) => {
         alert(reason.message);
     }
+
     componentDidMount() {
         this.props.initialize();
         window.addEventListener("unhandledrejection", this.catchAllUnhandledErrors);
@@ -33,9 +34,11 @@ class App extends React.Component {
     componentWillUnmount() {
         window.removeEventListener("unhandledrejection", this.catchAllUnhandledErrors);
     }
+
     render() {
         if (!this.props.isInitialized) {
-            return <Preloader/>
+            return <Preloader marginTop={'40vh'}/>
+
         }
         return (
             <AppWrapper>

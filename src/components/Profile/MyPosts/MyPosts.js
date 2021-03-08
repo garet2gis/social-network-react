@@ -4,40 +4,68 @@ import Post from "./Post/Post";
 import {Field, reduxForm} from "redux-form";
 import {maxLengthCreator, required} from "../../../utils/validators/validators";
 import {FormControl} from "../../common/FormsControls/FormsControls";
+import styled from "styled-components";
+import {StyledButton} from "../../styled/StyledButton";
 
-const maxLength10 = maxLengthCreator(10);
+const maxLength10 = maxLengthCreator(50);
 const Textarea = FormControl('textarea');
 
+
+export const PostBlockWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    width:100%;
+`
+
+export const PostBlockHeader = styled.h3`
+    margin:10px 0px;
+`
+
+export const PostsWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    width:100%;
+`
+
+
 const MyPosts = (props) => {
+
+    let reverseArr = props.posts.slice().reverse();
     let postsElements =
-        props.posts.map(p => <Post message={p.message} likeCount={p.likesCount} key={p.id}/>);
+        reverseArr.map(p => <Post fullName = {props.fullName} photo = {props.photo} message={p.message} likeCount={p.likesCount} key={p.id}/>);
 
     let onAddPost = (data) => {
         props.addPost(data.newPostText);
     }
 
     return (
-        <div>
-            <h3>My posts</h3>
+        <PostBlockWrapper>
+            <PostBlockHeader>My posts</PostBlockHeader>
             <AddNewPostForm onSubmit={onAddPost}/>
-            <div>
+            <PostsWrapper>
                 {postsElements}
-            </div>
-        </div>
+            </PostsWrapper>
+        </PostBlockWrapper>
     )
 }
 
+export const AddNewPostFormStyled = styled.form`
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
+`
+
+export const AddNewPostFormStyledButton = styled(StyledButton)`
+   align-self: flex-end;
+`
+
 let AddNewPostForm = (props) => {
     return (
-        <form onSubmit={props.handleSubmit}>
-            <div>
-                <Field placeholder={'Enter post'} name='newPostText' component={Textarea}
-                       validate={[required, maxLength10]}/>
-            </div>
-            <div>
-                <button>Add post</button>
-            </div>
-        </form>
+        <AddNewPostFormStyled onSubmit={props.handleSubmit}>
+            <Field placeholder={'Enter post'} name='newPostText' component={Textarea}
+                   validate={[required, maxLength10]}/>
+            <AddNewPostFormStyledButton type="submit" value="Add post"/>
+        </AddNewPostFormStyled>
     )
 }
 

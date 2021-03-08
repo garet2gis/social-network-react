@@ -1,6 +1,6 @@
 import React from "react";
 import classes from './User.module.css';
-import userAsset from '../../../assets/images/userAsset.png'
+import userAsset from '../../../assets/images/userAsset.svg'
 import {NavLink} from "react-router-dom";
 
 let User = (props) => {

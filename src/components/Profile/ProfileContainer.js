@@ -61,7 +61,7 @@ let mapStateToProps = (state) => ({
     status: state.profilePage.status,
     isAuth: state.auth.isAuth,
     authorizedUserId: state.auth.id,
-    editMode: state.profilePage.editMode
+    editMode: state.profilePage.editMode,
 });
 
 export default compose(

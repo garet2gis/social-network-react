@@ -1,12 +1,19 @@
 import React from "react";
 import loader from '../../../assets/images/loader.svg'
+import styled from "styled-components";
 
 
-let Preloader = () => {
+export const PreloaderWrapper = styled.div`
+    display: flex;
+    justify-content: center;
+    margin-top:${props => props.marginTop || 'auto'}
+`
+
+let Preloader = ({marginTop}) => {
     return (
-        <div>
+        <PreloaderWrapper marginTop = {marginTop}>
             <img src = {loader} alt = 'loader'/>
-        </div>
+        </PreloaderWrapper>
     )
 }
 export default Preloader;

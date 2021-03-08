@@ -20,7 +20,7 @@ const Global = createGlobalStyle`
         }
         body {
             margin: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            font-family: 'Segoe UI','Roboto',sans-serif;
             font-size: 1rem;
             font-weight: 400;
             line-height: 1.5;
@@ -28,14 +28,30 @@ const Global = createGlobalStyle`
             text-align: left;
             background-color: #fff;
         }
+
 `
 
 
 const theme = {
+    colorPalettes:{
+        second:{
+            body:"#ced7d8",
+            header:"#f47a60",
+            nav:"#7fe7dc",
+            other:"#316879"
+        },
+        first:{
+            body:"#e0cdbe",
+            other:"#a9c0a6",
+            nav: "#edca82",
+            header:"#097770",
+        }
+    },
     media:{
         phone: "(max-width: 660px)",
         tablet: "(max-width: 900px) and (min-width:660px)"
-    }
+    },
+    borderRadius:"5px"
 }
 
 export let renderEntireTree = () => {
