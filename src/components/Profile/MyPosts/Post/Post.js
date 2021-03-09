@@ -62,7 +62,7 @@ const Post = (props) => {
 
             <StyledMessage>{props.message}</StyledMessage>
 
-            <StyledLikes> <img src={like} alt ="likePicture"/> {props.likeCount}</StyledLikes>
+            <StyledLikes> <img src={like} alt ="like"/> {props.likeCount}</StyledLikes>
 
         </StyledPost>
     )

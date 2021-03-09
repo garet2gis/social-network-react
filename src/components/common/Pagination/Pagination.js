@@ -1,6 +1,67 @@
 import React, {useEffect, useState} from "react";
-import classes from './Pagination.module.css'
-import classNames from 'classnames'
+
+import styled, {css} from "styled-components";
+import {StyledButton} from "../../styled/StyledButton";
+
+const PageSelector = styled.span`
+    border: 1px solid ${props => props.theme.colorPalettes.second.other};
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    background-color: ${props => props.theme.colorPalettes.second.nav};
+    :hover{
+        background-color: ${props => props.theme.colorPalettes.second.other};
+        border-color: ${props => props.theme.colorPalettes.second.other};
+        filter: brightness(120%);
+        color: white;
+        cursor:pointer;
+    }
+    ${(props) => props.isCurrent &&
+    css`
+        background-color: ${props => props.theme.colorPalettes.second.other};
+        border-color: ${props => props.theme.colorPalettes.second.other};
+        filter: brightness(90%);
+        pointer-events: none;
+        color: white;
+    `}
+    
+    
+`
+
+const PaginationStyled = styled.div`
+    margin: 5px 0px;
+    display: flex;
+    width: 100%;
+    justify-content:center;
+    align-items: center;
+`
+
+const CustomButton = styled(StyledButton)`
+     height: 30px;
+     border-radius: 0px;
+     
+     ${(props) => {
+        if (props.isPrev) 
+            return css`
+                border-top-left-radius: 5px;
+                border-bottom-left-radius: 5px;`
+        else 
+            return css`
+                border-top-right-radius: 5px;
+                border-bottom-right-radius: 5px;`
+        
+     }}
+     margin:0px;
+     ${(props) => !props.isActive && css`pointer-events: none;
+                                         color:white;
+                                         opacity: 0.4;
+                                         
+                                            
+                                            `}
+     
+`
 
 let Pagination = ({totalItemsCount, pageSize, currentPage, onPageChanged, portionSize}) => {
 
@@ -8,7 +69,6 @@ let Pagination = ({totalItemsCount, pageSize, currentPage, onPageChanged, portio
     let pagesCount = Math.ceil(totalItemsCount / pageSize);
     let pages = [];
     for (let i = 1; i <= pagesCount; i++) pages.push(i);
-
 
     let portionsCount = Math.ceil(pagesCount / portionSize);
     let [portionNumber, setPortionNumber] = useState(1);
@@ -22,21 +82,26 @@ let Pagination = ({totalItemsCount, pageSize, currentPage, onPageChanged, portio
     let rightPortionPageNumber = portionNumber * portionSize;
 
     return (
-        <div>
-            {portionNumber > 1 &&
-            <button onClick={() => setPortionNumber((x) => --x)}>Prev</button>}
+        <PaginationStyled>
+
+            <CustomButton type="button" onClick={() => portionNumber > 1 && setPortionNumber((x) => --x)} value="Prev" isActive={portionNumber > 1} isPrev/>
+
             {
                 pages.filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber).map(p => {
-                    return <span
-                        className={classNames(currentPage === p && classes.selectedPage, classes.pageNumber)}
+                    return <PageSelector
                         onClick={() => {
-                            onPageChanged(p);
-                        }} key={p}>{` ${p} `}</span>
+                            p !== currentPage && onPageChanged(p);
+                        }}
+                        key={p}
+                        isCurrent={p === currentPage}>
+                        {` ${p} `}
+                    </PageSelector>
                 })
             }
-            {portionNumber < portionsCount &&
-            <button onClick={() => setPortionNumber((x) => ++x)}>Next</button>}
-        </div>
+
+            <CustomButton type="button" onClick={() => portionNumber < portionsCount && setPortionNumber((x) => ++x)} value="Next" isActive={portionNumber < portionsCount}/>
+
+        </PaginationStyled>
     )
 }
 

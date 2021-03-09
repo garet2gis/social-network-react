@@ -21,6 +21,7 @@ export const StyledModalOverlay = styled.div`
     padding: 1rem;
     overflow-y: auto;
     background-color: rgba(0, 0, 0, 0.7);
+    z-index:2;
 `
 
 export const StyledModal = styled.form`
@@ -32,6 +33,8 @@ export const StyledModal = styled.form`
     flex:1 0 100%;
     width: 100%;
   }
+  padding: 0px 10px;
+  z-index:2;
 `
 
 const createInfoFieldItem = (title, name, component, placeholder = null, validators = [], type = null) => {

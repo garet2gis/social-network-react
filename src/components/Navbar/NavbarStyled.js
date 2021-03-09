@@ -12,12 +12,16 @@ export const FlexItemNavbar = styled.div`
     @media ${props => props.theme.media.phone}{
         border-radius: 0px;
         position: sticky;
-        top:0px;
+        top:-2px;
+        padding-top:5px;
         z-index:1;
+        padding-right: 0px;
+        padding-left: 0px;
     }
 `
 
 export const StyledNavbar = styled.nav`
+    margin-top:10px;
     display: flex;
     flex-direction: column;
     font-size: 20px;
@@ -37,9 +41,7 @@ export const StyledNavbar = styled.nav`
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: space-evenly;
-        // position: fixed;
-        // z-index:999;
-        // top:10px;
+        
     }
 `
 

@@ -11,6 +11,19 @@ const StyledProfileTextInfo = styled.div`
     padding: 1vh;
 `
 
+const StyledLink = styled.a`
+    text-decoration: none;
+    color:${props => props.theme.colorPalettes.second.other || 'blue'};
+    :visited{
+        color:${props => props.theme.colorPalettes.second.other || 'blue'};
+    }
+    :hover{
+        filter:brightness(110%);
+    }
+   
+`
+
+
 const createInfoItem = (title, info) => {
     return <StyledInfoItem>
         <TitleInfoItem>{title}</TitleInfoItem>
@@ -48,7 +61,10 @@ const Contact = ({contactType, contactInfo}) => {
     return (
         <>
             {contactInfo &&
-            createInfoItem(`${contactType}: `, contactInfo)}
+            <StyledInfoItem>
+                <TitleInfoItem>{contactType}</TitleInfoItem>
+                <InfoItem><StyledLink href={contactInfo}>{contactInfo}</StyledLink></InfoItem>
+            </StyledInfoItem>}
         </>
     )
 }
