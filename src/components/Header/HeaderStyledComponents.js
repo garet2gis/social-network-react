@@ -9,7 +9,7 @@ export const HeaderStyledComponents = styled.header`
 
 export const StyledLogo = styled.div`
     width: ${props => props.width || '20px'};
-    background-color: black;
+    background-color: ${props => props.theme.colorPalettes.second.header};
     border-radius:35%;
     margin-left:5px;
     img{

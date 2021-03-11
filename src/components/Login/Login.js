@@ -16,6 +16,11 @@ const LoginStyled = styled.div`
     align-items:center;
     margin-bottom:10px;
 `
+const TestData = styled.div`
+    font-size:12px;
+    align-self:start;
+
+`
 const LoginFormStyled = styled.form`
     display: flex;
     flex-direction:column;
@@ -52,7 +57,12 @@ const Login = (props) => {
     }
     return (
         <LoginStyled>
-            <h1>Login</h1>
+            <TestData>
+                    <p>Test</p>
+                    <p>Email: free@samuraijs.com</p>
+                    <p>Password: free</p>
+            </TestData>
+
             <LoginReduxForm onSubmit={onSubmit} captchaUrl={props.captchaUrl}/>
         </LoginStyled>
     )
@@ -78,7 +88,7 @@ const LoginForm = (props) => {
                 <Field type={'checkbox'} name='rememberMe' component='input'/> remember me
             </div>
 
-            {props.captchaUrl && <img src={props.captchaUrl} alt = 'captcha'/>}
+            {props.captchaUrl && <img src={props.captchaUrl} alt='captcha'/>}
             {props.captchaUrl &&
             <div>
                 <Field placeholder={'Captcha'} name='captcha' component={Input}

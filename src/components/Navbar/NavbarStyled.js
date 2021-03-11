@@ -30,10 +30,10 @@ export const StyledNavbar = styled.nav`
     a{
         text-decoration: none;
         padding-bottom: 10px;
-        color:black;
+        color:${props => props.theme.colorPalettes.second.other};
         transition:0.2s;
         :hover{
-            color:${props => props.theme.colorPalettes.second.header};
+            filter: brightness(60%);
             transition:0.2s;
         }
     }

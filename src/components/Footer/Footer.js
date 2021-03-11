@@ -3,7 +3,8 @@ import styled from "styled-components";
 
 export const StyledFooter = styled.footer`
     height: 15vh;
-    text-align: center; 
+    text-align: center;
+    color:${props => props.theme.colorPalettes.second.body};
 `
 
 const Footer = () => {

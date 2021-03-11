@@ -35,9 +35,9 @@ const Global = createGlobalStyle`
 const theme = {
     colorPalettes:{
         second:{
-            body:"#ced7d8",
-            header:"#f47a60",
-            nav:"#7fe7dc",
+            body:"#50b4cf",
+            header:"#0a1a21",
+            nav:"#50b4cf",
             other:"#316879"
         },
         first:{

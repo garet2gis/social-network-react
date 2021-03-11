@@ -3,7 +3,7 @@ import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import React from "react";
-import {Redirect, Switch, HashRouter, Route} from "react-router-dom";
+import {Redirect, Switch, HashRouter, Route, withRouter} from "react-router-dom";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
@@ -16,17 +16,16 @@ import store from "./redux/redux-store";
 import withSuspense from "./hoc/withSuspense";
 import Footer from "./components/Footer/Footer";
 import {AppWrapper, FlexContainer, FlexItemContent} from "./AppStyled";
-import Error404 from "./components/common/errors/error404";
+import Error from "./components/common/errors/Error";
 
 
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
 
 
 class App extends React.Component {
-    catchAllUnhandledErrors = (reason, promise) => {
-        alert(reason.message);
+    catchAllUnhandledErrors = (event) => {
+        alert(event.reason);
     }
-
     componentDidMount() {
         this.props.initialize();
         window.addEventListener("unhandledrejection", this.catchAllUnhandledErrors);
@@ -39,7 +38,6 @@ class App extends React.Component {
     render() {
         if (!this.props.isInitialized) {
             return <Preloader marginTop={'40vh'}/>
-
         }
         return (
             <AppWrapper>
@@ -57,7 +55,7 @@ class App extends React.Component {
                             <Route path='/users' render={() => <UsersContainer/>}/>
                             <Route path='/login' render={() => <Login/>}/>
                             <Redirect exact from="/" to="/profile"/>
-                            <Route path='*' render={() => <Error404/>}/>
+                            <Route path='*' render={() => <Error/>}/>
                         </Switch>
                     </FlexItemContent>
                 </FlexContainer>
@@ -73,6 +71,7 @@ const mapStateToProps = (state) => ({
 
 
 const AppContainer = compose(
+    withRouter,
     connect(mapStateToProps, {initialize})
 )(App);
 

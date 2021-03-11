@@ -3,6 +3,7 @@ import React from 'react';
 import {StyledInfoItem, TitleInfoItem, InfoItem, Contacts} from "../ProfileInfoStyled";
 import {StyledButton} from "../../../styled/StyledButton";
 import styled from "styled-components";
+import {StyledHR} from "../../../styled/StyledHR";
 
 
 const StyledProfileTextInfo = styled.div`
@@ -45,7 +46,7 @@ const ProfileTextInfo = ({profile, setEditMode, isOwner}) => {
             return Boolean(profile.contacts[key]);
         }).length > 0 &&
         <Contacts>
-            <hr/>
+            <StyledHR/>
             Contacts: {Object.keys(profile.contacts).map(key => {
             return (
                 <Contact key={key} contactType={key} contactInfo={profile.contacts[key]}/>

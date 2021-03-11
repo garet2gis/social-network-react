@@ -16,7 +16,8 @@ export const StyledPost = styled.div`
     display:flex;
     flex-direction: column;
     align-self: center;
-    background-color:#dfe7e8;
+    background-color:${props => props.theme.colorPalettes.second.body};
+    filter:brightness(110%);
     padding:10px;
     @media ${props => props.theme.media.phone}{
         width:100%;

@@ -5,6 +5,7 @@ import classes from "../../../common/FormsControls/FormsControls.module.css";
 import styled from "styled-components";
 import {StyledInfoItem, TitleInfoItem, InfoItem, Contacts} from "../ProfileInfoStyled";
 import {StyledButton} from "../../../styled/StyledButton";
+import {StyledHR} from "../../../styled/StyledHR";
 
 const Input = FormControl('input', '100%');
 const Textarea = FormControl('textarea', '100%');
@@ -57,11 +58,11 @@ const ProfileEditForm = ({profile, handleSubmit, error, cancelSubmit}) => {
                 <div className={classes.formSummaryError}>{error}</div>}
 
                 {createInfoFieldItem('Full name: ', 'fullName', Input, 'full name')}
-                <hr/>
+                <StyledHR/>
                 {createInfoFieldItem('About me: ', 'aboutMe', Textarea, 'about me')}
                 {createInfoFieldItem('Looking for a job: ', 'lookingForAJob', 'input', null, [], 'checkbox')}
                 {createInfoFieldItem('Work preferences: ', 'lookingForAJobDescription', Textarea, 'work preferences')}
-                <hr/>
+                <StyledHR/>
                 <Contacts>
                     Contacts: {Object.keys(profile.contacts).map(key => {
                     return (
