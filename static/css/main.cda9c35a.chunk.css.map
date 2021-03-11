@@ -1,1 +1,0 @@
-{"version":3,"sources":["webpack://src/components/common/FormsControls/FormsControls.module.css"],"names":[],"mappings":"AAEA,uCACI,SAAU,CACV,oBACJ","file":"main.cda9c35a.chunk.css","sourcesContent":["\r\n\r\n.formSummaryError{\r\n    color: red;\r\n    border: solid red 2px;\r\n}"]}
