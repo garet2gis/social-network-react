@@ -2,15 +2,17 @@ import React from "react";
 import {StyledInput} from "../../styled/StyledInput";
 import styled from 'styled-components';
 
-const FormConrolStyled = styled.div`
+const FormControlStyled = styled.div`
     input, textarea {
-        border: ${props => {if (props.hasError) return 'solid red 2px';}};
+        border: ${props => {
+    if (props.hasError) return 'solid red 2px';
+}};
         &:focus{
-            border-color: ${props => {if (props.hasError) return 'red';}};
+            border-color: ${props => {
+    if (props.hasError) return 'red';
+}};
         }
     }
-    
-    
     
 `
 const ErrorStyled = styled.div`
@@ -20,17 +22,23 @@ const ErrorStyled = styled.div`
 `
 
 
+export const FormControl = (Element, width = '100%', isNeedErrors = true) => ({input, meta, ...props}) => {
+    let hasError = meta.touched && meta.error;
 
+    if (!isNeedErrors)
+        return <FormControlStyled>
+            <StyledInput width={width}>
+                <Element {...input} {...props} />
+            </StyledInput>
+        </FormControlStyled>
 
-export const FormControl = (Element, width)=> ({input, meta, ...props}) => {
-    const hasError = meta.touched && meta.error;
     return (
-        <FormConrolStyled hasError = {hasError}>
-            <StyledInput width = {width}>
+        <FormControlStyled hasError={hasError}>
+            <StyledInput width={width}>
                 <Element {...input} {...props} />
             </StyledInput>
             <ErrorStyled> {hasError && meta.error} </ErrorStyled>
-        </FormConrolStyled>
+        </FormControlStyled>
     );
 };
 

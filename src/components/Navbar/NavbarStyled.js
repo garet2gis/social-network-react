@@ -31,8 +31,10 @@ export const StyledNavbar = styled.nav`
         text-decoration: none;
         padding-bottom: 10px;
         color:black;
-        &:hover{
+        transition:0.2s;
+        :hover{
             color:${props => props.theme.colorPalettes.second.header};
+            transition:0.2s;
         }
     }
     padding: 0px;
@@ -44,4 +46,5 @@ export const StyledNavbar = styled.nav`
         
     }
 `
+
 

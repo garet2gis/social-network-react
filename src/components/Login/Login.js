@@ -5,7 +5,43 @@ import {connect} from "react-redux";
 import {FormControl} from "../common/FormsControls/FormsControls";
 import {maxLengthCreator, required} from "../../utils/validators/validators";
 import {Redirect} from "react-router-dom";
-import classes from "../common/FormsControls/FormsControls.module.css"
+import styled from "styled-components";
+import {StyledButton} from "../styled/StyledButton";
+
+const LoginStyled = styled.div`
+    display: flex;
+    flex-direction:column;
+    width:100%;
+    flex:1 0 100%;
+    align-items:center;
+    margin-bottom:10px;
+`
+const LoginFormStyled = styled.form`
+    display: flex;
+    flex-direction:column;
+    justify-content:space-evenly;
+    width:50%;
+    flex:0 0 50%;
+    margin-bottom:10px;
+    @media ${props => props.theme.media.phone}{
+        flex:0 0 100%;
+        width:100%;
+    } 
+    img{
+        width:200px;
+        align-self:center;
+        margin:10px 0px;
+    }
+`
+const StyledLoginButton = styled(StyledButton)`
+    align-self:flex-end;
+    margin:10px 0px;
+`
+const StyledError = styled.div`
+    align-self:center;
+    color:red;
+`
+
 
 const Login = (props) => {
     if (props.isAuth) {
@@ -15,10 +51,10 @@ const Login = (props) => {
         props.login(data);
     }
     return (
-        <div>
+        <LoginStyled>
             <h1>Login</h1>
             <LoginReduxForm onSubmit={onSubmit} captchaUrl={props.captchaUrl}/>
-        </div>
+        </LoginStyled>
     )
 }
 
@@ -28,7 +64,7 @@ const maxLength20 = maxLengthCreator(20);
 
 const LoginForm = (props) => {
     return (
-        <form onSubmit={props.handleSubmit}>
+        <LoginFormStyled onSubmit={props.handleSubmit}>
             <div>
                 <Field placeholder={'Email'} name='email' component={Input}
                        validate={[required, maxLength20]}/>
@@ -50,12 +86,9 @@ const LoginForm = (props) => {
             </div>}
 
             {props.error &&
-            <div className={classes.formSummaryError}>{props.error}</div>}
-
-            <div>
-                <button>Login</button>
-            </div>
-        </form>
+            <StyledError>{props.error}</StyledError>}
+            <StyledLoginButton type="submit" value="Login"/>
+        </LoginFormStyled>
     )
 }
 

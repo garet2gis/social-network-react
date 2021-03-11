@@ -9,11 +9,14 @@ const StyledProfileTextInfo = styled.div`
     border: 2px solid ${props => props.theme.colorPalettes.second.other || 'black'};
     border-radius: ${props => props.theme.borderRadius || "0px"};
     padding: 1vh;
+    word-break: break-all;
+    
 `
 
 const StyledLink = styled.a`
     text-decoration: none;
     color:${props => props.theme.colorPalettes.second.other || 'blue'};
+    
     :visited{
         color:${props => props.theme.colorPalettes.second.other || 'blue'};
     }
@@ -56,14 +59,34 @@ const ProfileTextInfo = ({profile, setEditMode, isOwner}) => {
     </StyledProfileTextInfo>
 }
 
+const getCorrectHref = (contactInfo) =>{
+    const isCorrectLink = contactInfo.match(/^(https?:\/\/)?([\w-]{1,32}\.[\w-]{1,32})[^\s]*$/) || [];
+    const isHaveProtocol = Boolean(isCorrectLink[1]);
+    let correctHref = '*/';
+    if (isCorrectLink.length > 0) {
+        if (!isHaveProtocol){
+            correctHref = 'https://' + contactInfo;
+        }
+        else{
+            correctHref = contactInfo
+        }
+    }
+    return correctHref;
+}
+
+
 
 const Contact = ({contactType, contactInfo}) => {
+
+
     return (
         <>
             {contactInfo &&
             <StyledInfoItem>
                 <TitleInfoItem>{contactType}</TitleInfoItem>
-                <InfoItem><StyledLink href={contactInfo}>{contactInfo}</StyledLink></InfoItem>
+                <InfoItem>
+                    <StyledLink href={getCorrectHref(contactInfo)}>{contactInfo}</StyledLink>
+                </InfoItem>
             </StyledInfoItem>}
         </>
     )

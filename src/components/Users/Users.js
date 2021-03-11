@@ -9,7 +9,7 @@ const createPaginator = (totalUsersCount, pageSize, currentPage, onPageChanged) 
                        pageSize={pageSize}
                        currentPage={currentPage}
                        onPageChanged={onPageChanged}
-                       portionSize={9}
+                       portionSize={6}
     />
 }
 
@@ -18,6 +18,12 @@ const UsersWrapper = styled.div`
     flex-direction: row;
     flex-wrap:wrap;
     justify-content:space-evenly;
+    flex-grow:2;
+`
+const UsersPageWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    flex-grow:1;
 `
 
 
@@ -27,16 +33,16 @@ let Users = (props) => {
                                            followingInProgress={props.followingInProgress}
     />);
     if (props.isFetching) {
-        return <Preloader/>;
+        return <Preloader marginTop = '10%'/>;
     }
     return (
-        <div>
+        <UsersPageWrapper>
             {createPaginator(props.totalUsersCount, props.pageSize, props.currentPage, props.onPageChanged)}
             <UsersWrapper>
                 {users}
             </UsersWrapper>
             {createPaginator(props.totalUsersCount, props.pageSize, props.currentPage, props.onPageChanged)}
-        </div>
+        </UsersPageWrapper>
     )
 }
 

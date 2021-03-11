@@ -23,12 +23,12 @@ const usersReducer = (state = initialState, action) => {
         case FOLLOW:
             return {
                 ...state,
-                users: updateObjectInArray(state.users,action.userId,"id",{followed: true})
+                users: updateObjectInArray(state.users, action.userId, "id", {followed: true})
             }
         case UNFOLLOW:
             return {
                 ...state,
-                users: updateObjectInArray(state.users,action.userId,"id",{followed: false})
+                users: updateObjectInArray(state.users, action.userId, "id", {followed: false})
             }
         case SET_USERS:
             return {
@@ -96,7 +96,6 @@ export const requestUsers = (currentPage, pageSize) => async (dispatch) => {
     dispatch(toggleFetching(false));
     dispatch(setUsers(data.items));
     dispatch(setTotalUserCount(data.totalCount));
-
 }
 
 export default usersReducer;

@@ -1,8 +1,8 @@
 import React from "react";
 
 import Post from "./Post/Post";
-import {Field, reduxForm} from "redux-form";
-import {maxLengthCreator, required} from "../../../utils/validators/validators";
+import {Field, reduxForm, reset} from "redux-form";
+import {isMessage, maxLengthCreator} from "../../../utils/validators/validators";
 import {FormControl} from "../../common/FormsControls/FormsControls";
 import styled from "styled-components";
 import {StyledButton} from "../../styled/StyledButton";
@@ -60,15 +60,27 @@ export const AddNewPostFormStyledButton = styled(StyledButton)`
 `
 
 let AddNewPostForm = (props) => {
+    const addPost = e => {
+        if (e.key === "Enter" && e.shiftKey === false) {
+            e.preventDefault();
+            if (e.target.value) {
+                props.handleSubmit(props.values);
+            }
+        }
+    }
     return (
         <AddNewPostFormStyled onSubmit={props.handleSubmit}>
             <Field placeholder={'Enter post'} name='newPostText' component={Textarea}
-                   validate={[required, maxLength10]}/>
+                   validate={[isMessage, maxLength10]} onKeyPress = {addPost}/>
             <AddNewPostFormStyledButton type="submit" value="Add post"/>
         </AddNewPostFormStyled>
     )
 }
 
-AddNewPostForm = reduxForm({form: 'AddNewPostForm'})(AddNewPostForm);
+const afterSubmit = (formValues, dispatch) => {
+    dispatch(reset("AddNewPostForm"));
+}
+
+AddNewPostForm = reduxForm({form: 'AddNewPostForm',onSubmitSuccess: afterSubmit})(AddNewPostForm);
 
 export default MyPosts;

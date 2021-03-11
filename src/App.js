@@ -16,6 +16,7 @@ import store from "./redux/redux-store";
 import withSuspense from "./hoc/withSuspense";
 import Footer from "./components/Footer/Footer";
 import {AppWrapper, FlexContainer, FlexItemContent} from "./AppStyled";
+import Error404 from "./components/common/errors/error404";
 
 
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
@@ -56,7 +57,7 @@ class App extends React.Component {
                             <Route path='/users' render={() => <UsersContainer/>}/>
                             <Route path='/login' render={() => <Login/>}/>
                             <Redirect exact from="/" to="/profile"/>
-                            <Route path='*' render={() => <div>404 NOT FOUND</div>}/>
+                            <Route path='*' render={() => <Error404/>}/>
                         </Switch>
                     </FlexItemContent>
                 </FlexContainer>
@@ -76,6 +77,7 @@ const AppContainer = compose(
 )(App);
 
 const MainApp = () => {
+    //better use Browser Router
     return (
         <HashRouter>
             <Provider store={store}>

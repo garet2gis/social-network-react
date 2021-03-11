@@ -9,12 +9,14 @@ export const StyledButton = styled.input`
     border:0.15em solid ${props => props.theme.colorPalettes.second.other};
     color:white;
     background-color:${props => props.theme.colorPalettes.second.other};
+    transition: 0.2s;
     text-align:center;
     cursor:pointer;
     font-weight:500;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue";
     &:hover {
         filter: brightness(120%);
+        transition: 0.4s;
     }
     &:active {
         background-color:#51737d;

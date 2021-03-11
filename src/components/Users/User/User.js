@@ -1,5 +1,5 @@
 import React from "react";
-import classes from './User.module.css';
+
 import userAsset from '../../../assets/images/userAsset.svg'
 import {NavLink} from "react-router-dom";
 import styled from "styled-components";
@@ -10,9 +10,11 @@ export const StyledUserLink = styled.div`
    display:flex;
    width:100%;
    height:100%;
+   transition: 0.3s;
    background-color:${props => props.theme.colorPalettes.second.body || 'grey'};
    :hover{
        filter:brightness(110%); 
+       transition: 0.3s;
    }
    img{
        align-self:center;
@@ -31,12 +33,8 @@ export const StyledNavLink = styled(NavLink)`
    height:100%;
    display:flex;
    text-decoration: none;
-   
    :visited{
         color:${props => props.theme.colorPalettes.second.other || 'blue'};
-   }
-   :hover{
-        filter:brightness(110%);
    }
    
 `
@@ -52,6 +50,7 @@ export const StyledUser = styled.div`
     //align-items:center;
     //flex-direction:column;
     position:relative;
+    max-height:40%;
 `
 
 export const StyledName = styled.div`
@@ -83,8 +82,7 @@ let User = (props) => {
         <StyledUser>
             <StyledUserLink>
                 <StyledNavLink to={`/profile/${props.user.id}`}>
-                    <img src={props.user.photos.small === null ? userAsset : props.user.photos.small}
-                         className={classes.avatar} alt="user"/>
+                    <img src={props.user.photos.small === null ? userAsset : props.user.photos.small} alt="user"/>
                     <StyledUserText>
                         <StyledName>{props.user.name}</StyledName>
                         <StyledStatus>{props.user.status}</StyledStatus>

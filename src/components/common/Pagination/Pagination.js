@@ -5,11 +5,17 @@ import {StyledButton} from "../../styled/StyledButton";
 
 const PageSelector = styled.span`
     border: 1px solid ${props => props.theme.colorPalettes.second.other};
-    width: 30px;
+    width: 35px;
     height: 30px;
     display: flex;
     justify-content:center;
     align-items: center;
+    @media ${props => props.theme.media.phone}{
+        font-size:13px;
+        width: 25px;
+        height: 25px;
+    }
+    
     background-color: ${props => props.theme.colorPalettes.second.nav};
     :hover{
         background-color: ${props => props.theme.colorPalettes.second.other};
@@ -41,16 +47,25 @@ const PaginationStyled = styled.div`
 const CustomButton = styled(StyledButton)`
      height: 30px;
      border-radius: 0px;
+     @media ${props => props.theme.media.phone}{
+        font-size:13px;
+        min-width:23px;
+        min-height:25px;
+        height:25px;
+    }
      
      ${(props) => {
-        if (props.isPrev) 
+        if (props.isFirst) 
             return css`
                 border-top-left-radius: 5px;
-                border-bottom-left-radius: 5px;`
-        else 
+                border-bottom-left-radius: 5px;
+                border-right: 2px solid ${props => props.theme.colorPalettes.second.body};
+                `
+        else if (props.isLast)
             return css`
                 border-top-right-radius: 5px;
-                border-bottom-right-radius: 5px;`
+                border-bottom-right-radius: 5px;
+                border-left: 2px solid ${props => props.theme.colorPalettes.second.body};`
         
      }}
      margin:0px;
@@ -64,7 +79,6 @@ const CustomButton = styled(StyledButton)`
 `
 
 let Pagination = ({totalItemsCount, pageSize, currentPage, onPageChanged, portionSize}) => {
-
 
     let pagesCount = Math.ceil(totalItemsCount / pageSize);
     let pages = [];
@@ -83,9 +97,8 @@ let Pagination = ({totalItemsCount, pageSize, currentPage, onPageChanged, portio
 
     return (
         <PaginationStyled>
-
-            <CustomButton type="button" onClick={() => portionNumber > 1 && setPortionNumber((x) => --x)} value="Prev" isActive={portionNumber > 1} isPrev/>
-
+            <CustomButton type="button" onClick={() => portionNumber > 1 && setPortionNumber(1)} value="First" isActive={portionNumber > 1} isFirst/>
+            <CustomButton type="button" onClick={() => portionNumber > 1 && setPortionNumber((x) => --x)} value="Prev" isActive={portionNumber > 1}/>
             {
                 pages.filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber).map(p => {
                     return <PageSelector
@@ -98,9 +111,8 @@ let Pagination = ({totalItemsCount, pageSize, currentPage, onPageChanged, portio
                     </PageSelector>
                 })
             }
-
             <CustomButton type="button" onClick={() => portionNumber < portionsCount && setPortionNumber((x) => ++x)} value="Next" isActive={portionNumber < portionsCount}/>
-
+            <CustomButton type="button" onClick={() => portionNumber < portionsCount && setPortionNumber(portionsCount)} value="Last" isActive={portionNumber < portionsCount} isLast/>
         </PaginationStyled>
     )
 }

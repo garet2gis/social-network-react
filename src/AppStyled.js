@@ -27,6 +27,8 @@ export const FlexContainer = styled.div`
 `
 
 export const FlexItemContent = styled.div`
+    display:flex;
+    flex-direction: column;
     width: 100%;
     padding-right: 15px;
     padding-left: 15px;
