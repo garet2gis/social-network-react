@@ -5,10 +5,7 @@ import {StyledInput} from "../../styled/StyledInput";
 
 export const StyledProfileStatus = styled.span`
     font-size: 14px;
-    
 `
-
-
 
 export const StyledEditModeStatus = styled(StyledInput)`
     min-height: 40px;
@@ -34,7 +31,6 @@ export const StyledStaticStatus = styled.div`
 `
 
 const ProfileStatus = (props) => {
-
     let [editMode, setEditMode] = useState(false);
     let [status, setStatus] = useState(props.status);
 

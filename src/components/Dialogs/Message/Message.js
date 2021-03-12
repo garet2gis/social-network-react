@@ -1,5 +1,4 @@
 import React from "react";
-import classes from './../Dialogs.module.css';
 import styled from "styled-components";
 
 const MessageStyled = styled.div`
@@ -14,10 +13,9 @@ const MessageStyled = styled.div`
     background-color:white;
 `
 
-
 const Message = (props) => {
     return (
-        <MessageStyled className={classes.message}>
+        <MessageStyled>
             {props.message}
         </MessageStyled>
     )

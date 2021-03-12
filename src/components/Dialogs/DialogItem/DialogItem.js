@@ -23,26 +23,18 @@ const DialogItemStyled = styled.div`
             filter:brightness(90%);
         }
     `}
-    
-    
-    
-    
-
 `
 
 
 const DialogItem = (props) => {
-    //let path = `/dialogs/${props.id}`
+    //fake code for selected dialog with Dmitry
     let isFirst = false;
-    //hardcode
-
     if (props.name === 'Dmitry') {
         isFirst = true;
     }
 
     return (
         <DialogItemStyled isFirst = {isFirst}>
-            {/*<NavLink to={path}>{props.name}</NavLink>*/}
             {props.name}
         </DialogItemStyled>
     )

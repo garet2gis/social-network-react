@@ -1,7 +1,6 @@
 import React from "react";
 import {Field, reduxForm} from "redux-form";
 import {FormControl} from "../../../common/FormsControls/FormsControls";
-import classes from "../../../common/FormsControls/FormsControls.module.css";
 import styled from "styled-components";
 import {StyledInfoItem, TitleInfoItem, InfoItem, Contacts} from "../ProfileInfoStyled";
 import {StyledButton} from "../../../styled/StyledButton";
@@ -49,14 +48,10 @@ const createInfoFieldItem = (title, name, component, placeholder = null, validat
 }
 
 
-const ProfileEditForm = ({profile, handleSubmit, error, cancelSubmit}) => {
+const ProfileEditForm = ({profile, handleSubmit, cancelSubmit}) => {
     return (
         <StyledModalOverlay>
-
             <StyledModal onSubmit={handleSubmit}>
-                {error &&
-                <div className={classes.formSummaryError}>{error}</div>}
-
                 {createInfoFieldItem('Full name: ', 'fullName', Input, 'full name')}
                 <StyledHR/>
                 {createInfoFieldItem('About me: ', 'aboutMe', Textarea, 'about me')}

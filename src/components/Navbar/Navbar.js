@@ -7,7 +7,6 @@ export const NavLinkFake = styled.div`
    padding-bottom:10px;
     a{
         color:grey;
-        
         :visited{
             color:grey;
         }
@@ -22,7 +21,6 @@ export const NavLinkFake = styled.div`
 const Navbar = () => {
     return (
         <FlexItemNavbar>
-
             <StyledNavbar>
                 <NavLink to='/profile'>Profile</NavLink>
                 <NavLink to='/users'>Users</NavLink>
@@ -37,9 +35,7 @@ const Navbar = () => {
                 <NavLinkFake>
                     <NavLink to='*'>Settings</NavLink>
                 </NavLinkFake>
-
             </StyledNavbar>
-
         </FlexItemNavbar>
     )
 }

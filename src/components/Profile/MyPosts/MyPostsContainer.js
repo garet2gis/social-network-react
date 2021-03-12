@@ -15,7 +15,5 @@ const MyPostContainer = (props) =>{
     return <MyPosts {...props}/>
 }
 
-
-
 export default connect(mapStateToProps, {addPost})(MyPostContainer);
 

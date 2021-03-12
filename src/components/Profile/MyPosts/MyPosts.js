@@ -29,7 +29,6 @@ export const PostsWrapper = styled.div`
 
 
 const MyPosts = (props) => {
-
     let reverseArr = props.posts.slice().reverse();
     let postsElements =
         reverseArr.map(p => <Post fullName = {props.fullName} photo = {props.photo} message={p.message} likeCount={p.likesCount} key={p.id}/>);

@@ -10,14 +10,11 @@ class HeaderContainer extends React.Component {
         await this.props.logout();
         this.props.history.push('/login');
     }
-    
+
     render() {
         return <Header isAuth = {this.props.isAuth} login = {this.props.login} logout = {this.logoutRedirect} />
     }
 }
-
-
-
 
 let mapStateToProps = (state) => ({
     login:state.auth.login,

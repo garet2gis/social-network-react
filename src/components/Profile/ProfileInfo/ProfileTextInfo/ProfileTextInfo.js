@@ -11,7 +11,6 @@ const StyledProfileTextInfo = styled.div`
     border-radius: ${props => props.theme.borderRadius || "0px"};
     padding: 1vh;
     word-break: break-all;
-    
 `
 
 const StyledLink = styled.a`
@@ -78,8 +77,6 @@ const getCorrectHref = (contactInfo) =>{
 
 
 const Contact = ({contactType, contactInfo}) => {
-
-
     return (
         <>
             {contactInfo &&
