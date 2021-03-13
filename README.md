@@ -1,6 +1,6 @@
 # Social Network made with react/redux
 
-[Link to the demo project.](http://example.com/ "Необязательная подсказка")
+[Link to the demo project.](http://example.com/ "react-social-network")
 
 This training project was made to master following technologies:
 
