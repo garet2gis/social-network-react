@@ -6,7 +6,7 @@ This training project was made to master following technologies:
 
 * React
 * React hoc, hooks
-* Ract-redux
+* React-redux
 * Redux
 * Redux-thunk
 * Redux-form
