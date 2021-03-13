@@ -1,6 +1,6 @@
 # Social Network made with react/redux
 
-[Link to the demo project.](http://example.com/ "react-social-network")
+[Link to the demo project.](https://garet2gis.github.io/social-network-react/ "react-social-network")
 
 This training project was made to master following technologies:
 
