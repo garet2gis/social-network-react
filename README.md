@@ -13,3 +13,13 @@ This training project was made to master following technologies:
 * Styled-components
 * CSS Flexbox
 * Axios
+
+What theoretical topics were studied:
+
+* SPA
+* One-way data flow
+* VirtualDOM
+* Pagination
+* REST API
+* DAL(Data Access Layer)
+* Pure functions
