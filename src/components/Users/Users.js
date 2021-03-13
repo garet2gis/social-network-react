@@ -19,7 +19,9 @@ const UsersWrapper = styled.div`
     flex-wrap:wrap;
     justify-content:space-evenly;
     flex-grow:2;
+    margin: 10px 0px;
 `
+
 const UsersPageWrapper = styled.div`
     display: flex;
     flex-direction: column;

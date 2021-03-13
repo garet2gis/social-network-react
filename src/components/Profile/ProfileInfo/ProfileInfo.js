@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import Preloader from '../../common/Preloader/Preloader';
 import userAsset from '../../../assets/images/userAsset.svg'
-import ProfileStatus from "./ProfileStatus";
+import ProfileStatus from "./ProfileStatus/ProfileStatus";
 import ProfileEditForm from "./ProfileEditForm/ProfileEditForm";
 import {
     Avatar,

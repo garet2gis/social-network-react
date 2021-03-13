@@ -18,8 +18,7 @@ export const StyledUserLink = styled.div`
        border-radius: ${props => props.theme.borderRadius || "0px"};
    }
    padding:10px;
-   border: 2px solid ${props => props.theme.colorPalettes.second.other || 'black'};
-   border-radius: ${props => props.theme.borderRadius || "0px"};
+   border-bottom: 2px solid ${props => props.theme.colorPalettes.second.other || 'black'};
    word-break: break-all;
 `
 
@@ -40,7 +39,6 @@ export const StyledUser = styled.div`
    @media ${props => props.theme.media.phone}{
         width:100%;
     }
-    margin: 5px 0px;
     display:flex;
     justify-content:space-evenly;
     position:relative;

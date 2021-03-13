@@ -75,6 +75,5 @@ export default compose(
         saveProfile
     }),
     withRouter
-    //withAuthRedirect
 )
 (ProfileContainer)
