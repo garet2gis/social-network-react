@@ -12,3 +12,4 @@ This training project was made to master following technologies:
 * Redux-form
 * Styled-components
 * CSS Flexbox
+* Axios
