@@ -1,15 +1,27 @@
 const ADD_MESSAGE = 'ADD-MESSAGE';
 
+type DialogType = {
+    id: number
+    name: string
+}
+type MessageType = {
+    id: number
+    message: string
+}
+
 const initialState = {
     dialogs: [
         {id: 1, name: 'Dmitry'},
         {id: 2, name: 'Nikita'},
         {id: 3, name: 'Victor'},
         {id: 4, name: 'Konstantin'}
-    ],
+    ] as Array<DialogType>,
     messages: [
         {id: 1, message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '},
-        {id: 2, message: 'Vivamus fermentum est sed metus rutrum malesuada. Aliquam feugiat mi nec enim luctus convallis'},
+        {
+            id: 2,
+            message: 'Vivamus fermentum est sed metus rutrum malesuada. Aliquam feugiat mi nec enim luctus convallis'
+        },
         {id: 3, message: 'Aliquam tortor purus, luctus et faucibus sit amet'},
         {id: 4, message: 'Vestibulum facilisis rhoncus venenatis.'},
         {id: 5, message: 'Fusce vitae odio eu elit pharetra varius. Etiam tempor eu neque ut feugiat. '},
@@ -21,22 +33,35 @@ const initialState = {
         {id: 11, message: 'Suspendisse imperdiet ante at arcu molestie faucibus.'},
         {id: 12, message: 'Aliquam erat volutpat. '},
         {id: 13, message: 'Sed molestie, nisi sagittis venenatis euismod'},
-        {id: 14, message: 'Nunc tristique, nisl eget eleifend dignissim, tortor mi semper urna, sed consequat nunc nisi a nisi.'},
-    ]
+        {
+            id: 14,
+            message: 'Nunc tristique, nisl eget eleifend dignissim, tortor mi semper urna, sed consequat nunc nisi a nisi.'
+        },
+    ] as Array<MessageType>
 }
 
-const dialogsReducer = (state = initialState, action) => {
+export type InitialStateType = typeof initialState
+
+const dialogsReducer = (state = initialState, action: any): InitialStateType => {
     switch (action.type) {
         case ADD_MESSAGE:
             return {
                 ...state,
-                messages: [...state.messages, {id: state.messages[state.messages.length-1].id+1, message: action.newMessageBody}]
+                messages: [...state.messages, {
+                    id: state.messages[state.messages.length - 1].id + 1,
+                    message: action.newMessageBody
+                }]
             }
         default:
             return state
     }
 }
 
-export const addMessage = (newMessageBody) => ({type: ADD_MESSAGE, newMessageBody});
+type AddMessageActionType = {
+    type: typeof ADD_MESSAGE
+    newMessageBody: string
+}
 
-export default dialogsReducer;
+export const addMessage = (newMessageBody: string): AddMessageActionType => ({type: ADD_MESSAGE, newMessageBody})
+
+export default dialogsReducer

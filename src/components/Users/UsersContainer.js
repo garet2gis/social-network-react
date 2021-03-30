@@ -1,10 +1,6 @@
 import {connect} from "react-redux";
 import {
     follow, requestUsers,
-    setCurrentPage,
-    setTotalUserCount,
-    setUsers,
-    toggleFetching,
     unfollow
 } from "../../redux/users-reducer";
 import Users from "./Users";
@@ -48,7 +44,7 @@ let mapStateToProps = (state) => {
     }
 }
 
-let mapDispatchToProps = {follow, unfollow, setUsers, setCurrentPage, setTotalUserCount, toggleFetching, requestUsers};
+let mapDispatchToProps = {follow, unfollow,requestUsers};
 
 export default compose(
     connect(mapStateToProps, mapDispatchToProps),

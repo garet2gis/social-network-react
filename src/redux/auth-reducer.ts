@@ -6,15 +6,18 @@ const SET_USER_AUTH_DATA = 'SET_USER_AUTH_DATA';
 const SET_CAPTCHA_URL_SUCCESS = 'SET_CAPTCHA_URL_SUCCESS';
 const DELETE_USER_AUTH_DATA = 'DELETE_USER_AUTH_DATA';
 
+
 const initialState = {
-    id: null,
-    login: null,
-    email: null,
-    isAuth: false,
-    captchaUrl: null
+    id: null as number | null,
+    login: null as string | null,
+    email: null as string | null,
+    isAuth: false as boolean,
+    captchaUrl: null as string | null,
 };
 
-const authReducer = (state = initialState, action) => {
+export type InitialStateType = typeof initialState;
+
+const authReducer = (state = initialState, action: any): InitialStateType => {
     switch (action.type) {
         case SET_USER_AUTH_DATA:
             return {
@@ -41,18 +44,48 @@ const authReducer = (state = initialState, action) => {
     }
 }
 
-const setUserAuthData = (data) => ({type: SET_USER_AUTH_DATA, data});
-const setCaptchaUrlSuccess = (data) => ({type: SET_CAPTCHA_URL_SUCCESS, data});
-const deleteUserAuthData = () => ({type: DELETE_USER_AUTH_DATA});
+type AuthDataType = {
+    userId:number;
+    email:string;
+    login:string;
+}
+
+type SetUserAuthDataType = {
+    type: typeof SET_USER_AUTH_DATA;
+    data: AuthDataType;
+}
+
+const setUserAuthData = (data : AuthDataType):SetUserAuthDataType => ({type: SET_USER_AUTH_DATA, data});
+
+type SetCaptchaUrlSuccessType = {
+    type:typeof SET_CAPTCHA_URL_SUCCESS;
+    data:string;
+}
+
+const setCaptchaUrlSuccess = (data : string):SetCaptchaUrlSuccessType => ({type: SET_CAPTCHA_URL_SUCCESS, data});
+
+type DeleteUserAuthDataType ={
+    type:typeof DELETE_USER_AUTH_DATA;
+}
+
+const deleteUserAuthData = ():DeleteUserAuthDataType => ({type: DELETE_USER_AUTH_DATA});
 
 
-export const authMe = () => async (dispatch) => {
+export const authMe = () => async (dispatch :any) => {
     const data = await authAPI.authMe();
     if (data.resultCode === 0)
         dispatch(setUserAuthData(data.data));
 };
 
-export const login = (loginData) => async (dispatch) => {
+
+type LoginDataType = {
+    email:string;
+    password:string;
+    rememberMe:boolean;
+    captcha:string;
+}
+
+export const login = (loginData : LoginDataType) => async (dispatch:any) => {
     let data = await authAPI.login(loginData);
     if (data.resultCode === 0)
         dispatch(authMe());
@@ -63,13 +96,13 @@ export const login = (loginData) => async (dispatch) => {
     }
 };
 
-export const logout = () => async (dispatch) => {
+export const logout = () => async (dispatch : any) => {
     let data = await authAPI.logout();
     if (data.resultCode === 0)
         dispatch(deleteUserAuthData())
 };
 
-export const getCaptchaUrl = () => async (dispatch) => {
+export const getCaptchaUrl = () => async (dispatch :any) => {
     let data = await securityAPI.getCaptchaUrl();
     dispatch(setCaptchaUrlSuccess(data.url));
 };

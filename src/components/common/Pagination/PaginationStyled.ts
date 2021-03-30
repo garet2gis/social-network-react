@@ -2,30 +2,35 @@ import styled, {css} from "styled-components";
 import {StyledButton} from "../../styled/StyledButton";
 
 
-export const PageSelector = styled.span`
-    border: 1px solid ${props => props.theme.colorPalettes.second.other};
+export interface PageSelectorPropsType {
+    isCurrent: boolean
+}
+
+
+export const PageSelector = styled.span<PageSelectorPropsType>`
+    border: 1px solid ${(props )=> props.theme.colorPalettes.second.other};
     width: 35px;
     height: 30px;
     display: flex;
     justify-content:center;
     align-items: center;
-    background-color: ${props => props.theme.colorPalettes.second.nav};
+    background-color: ${(props ) => props.theme.colorPalettes.second.nav};
     :hover{
         background-color: ${props => props.theme.colorPalettes.second.other};
-        border-color: ${props => props.theme.colorPalettes.second.other};
+        border-color: ${(props ) => props.theme.colorPalettes.second.other};
         filter: brightness(120%);
         color: white;
         cursor:pointer;
     }
     ${(props) => props.isCurrent &&
     css`
-        background-color: ${props => props.theme.colorPalettes.second.other};
-        border-color: ${props => props.theme.colorPalettes.second.other};
+        background-color: ${(props) => props.theme.colorPalettes.second.other};
+        border-color: ${(props) => props.theme.colorPalettes.second.other};
         filter: brightness(90%);
         pointer-events: none;
         color: white;
     `}
-    @media ${props => props.theme.media.phone}{
+    @media ${(props) => props.theme.media.phone}{
         font-size:13px;
         width: 25px;
         height: 25px;
@@ -40,7 +45,13 @@ export const PaginationStyled = styled.div`
     align-items: center;
 `
 
-export const PaginationButtonStyled = styled(StyledButton)`
+export interface PaginationButtonStyledPropsType {
+    isFirst?: boolean
+    isLast?: boolean
+    isActive: boolean
+}
+
+export const PaginationButtonStyled = styled(StyledButton)<PaginationButtonStyledPropsType>`
      height: 30px;
      border-radius: 0px;
      margin:0px;

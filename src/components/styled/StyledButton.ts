@@ -1,6 +1,11 @@
 import styled from "styled-components";
 
-export const StyledButton = styled.input`
+
+export interface StyledButtonType {
+
+}
+
+export const StyledButton = styled.input<StyledButtonType>`
     min-width:60px;
     min-height:30px;
     font-size: 15px;

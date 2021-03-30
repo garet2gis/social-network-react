@@ -10,9 +10,18 @@ import {
     StyledUserLink,
     StyledUserText
 } from "./UserStyled";
+import {UserType} from "../../../types/types";
+
+type PropTypes = {
+    user: UserType
+    follow: (userId : number)=>void
+    unfollow: (userId : number)=>void
+    followingInProgress : Array<number>
+}
 
 
-let User = (props) => {
+
+let User : React.FC<PropTypes> = (props) => {
     return (
         <StyledUser>
             <StyledUserLink>

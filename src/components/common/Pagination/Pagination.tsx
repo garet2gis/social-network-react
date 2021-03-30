@@ -1,8 +1,16 @@
 import React, {useEffect, useState} from "react";
 import {PaginationButtonStyled, PageSelector, PaginationStyled} from "./PaginationStyled";
 
+type PropsType = {
+    totalItemsCount: number
+    pageSize: number
+    currentPage: number
+    onPageChanged: (page: number) => void
+    portionSize: number
+}
 
-let Pagination = ({totalItemsCount, pageSize, currentPage, onPageChanged, portionSize}) => {
+
+let Pagination: React.FC<PropsType> = ({totalItemsCount, pageSize, currentPage, onPageChanged, portionSize}) => {
 
     let pagesCount = Math.ceil(totalItemsCount / pageSize);
     let pages = [];
@@ -19,12 +27,17 @@ let Pagination = ({totalItemsCount, pageSize, currentPage, onPageChanged, portio
     let leftPortionPageNumber = ((portionNumber - 1) * portionSize) + 1;
     let rightPortionPageNumber = portionNumber * portionSize;
 
+
+    const isActivePrev = portionSize>1
+    const isActiveNext = portionNumber < portionsCount
+
     return (
         <PaginationStyled>
             <PaginationButtonStyled type="button" onClick={() => portionNumber > 1 && setPortionNumber(1)} value="First"
-                                    isActive={portionNumber > 1} isFirst/>
-            <PaginationButtonStyled type="button" onClick={() => portionNumber > 1 && setPortionNumber((x) => --x)} value="Prev"
-                                    isActive={portionNumber > 1}/>
+                                    isActive={isActivePrev} isFirst/>
+            <PaginationButtonStyled type="button" onClick={() => portionNumber > 1 && setPortionNumber((x) => --x)}
+                                    value="Prev"
+                                    isActive={isActivePrev}/>
             {
                 pages.filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber).map(p => {
                     return <PageSelector
@@ -37,10 +50,12 @@ let Pagination = ({totalItemsCount, pageSize, currentPage, onPageChanged, portio
                     </PageSelector>
                 })
             }
-            <PaginationButtonStyled type="button" onClick={() => portionNumber < portionsCount && setPortionNumber((x) => ++x)}
-                                    value="Next" isActive={portionNumber < portionsCount}/>
-            <PaginationButtonStyled type="button" onClick={() => portionNumber < portionsCount && setPortionNumber(portionsCount)}
-                                    value="Last" isActive={portionNumber < portionsCount} isLast/>
+            <PaginationButtonStyled type="button"
+                                    onClick={() => portionNumber < portionsCount && setPortionNumber((x) => ++x)}
+                                    value="Next" isActive={isActiveNext}/>
+            <PaginationButtonStyled type="button"
+                                    onClick={() => portionNumber < portionsCount && setPortionNumber(portionsCount)}
+                                    value="Last" isActive={isActiveNext} isLast/>
         </PaginationStyled>
     )
 }

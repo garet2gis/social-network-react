@@ -3,8 +3,10 @@ import Preloader from "../common/Preloader/Preloader";
 import User from "./User/User";
 import Pagination from "../common/Pagination/Pagination";
 import styled from "styled-components";
+import {UserType} from "../../types/types";
 
-const createPaginator = (totalUsersCount, pageSize, currentPage, onPageChanged) => {
+
+const createPaginator = (totalUsersCount : number, pageSize : number, currentPage : number, onPageChanged : () => void) => {
     return <Pagination totalItemsCount={totalUsersCount}
                        pageSize={pageSize}
                        currentPage={currentPage}
@@ -29,7 +31,19 @@ const UsersPageWrapper = styled.div`
 `
 
 
-let Users = (props) => {
+type PropsType = {
+    users: Array<UserType>
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
+    isFetching: boolean
+    followingInProgress: Array<number>
+    follow : () =>void
+    unfollow: () => void
+    onPageChanged: ()=>void
+}
+
+let Users : React.FC<PropsType> = (props) => {
     let users = props.users.map(u => <User key={u.id} user={u} follow={props.follow}
                                            unfollow={props.unfollow}
                                            followingInProgress={props.followingInProgress}

@@ -31,9 +31,9 @@ const Global = createGlobalStyle`
 
 `
 
-
 const theme = {
     colorPalettes:{
+        //reactPalette
         second:{
             body:"#50b4cf",
             header:"#0a1a21",
