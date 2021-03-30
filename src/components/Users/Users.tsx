@@ -6,7 +6,7 @@ import styled from "styled-components";
 import {UserType} from "../../types/types";
 
 
-const createPaginator = (totalUsersCount : number, pageSize : number, currentPage : number, onPageChanged : () => void) => {
+const createPaginator = (totalUsersCount : number, pageSize : number, currentPage : number, onPageChanged : (currentPage:number) => void) => {
     return <Pagination totalItemsCount={totalUsersCount}
                        pageSize={pageSize}
                        currentPage={currentPage}
@@ -38,9 +38,11 @@ type PropsType = {
     currentPage: number
     isFetching: boolean
     followingInProgress: Array<number>
-    follow : () =>void
-    unfollow: () => void
-    onPageChanged: ()=>void
+
+    follow : (userId: number) =>void
+    unfollow: (userId: number) => void
+    onPageChanged: (currentPage : number)=>void
+    requestUsers : (currentPage:number, pageSize:number)=>void
 }
 
 let Users : React.FC<PropsType> = (props) => {

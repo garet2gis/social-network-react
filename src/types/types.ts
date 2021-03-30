@@ -36,6 +36,7 @@ export type UserType = {
     photos : PhotoType
     followed:boolean
 }
+
 type ColorPaletteType = {
     body: string
     header:string
