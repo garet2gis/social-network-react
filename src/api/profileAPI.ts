@@ -1,25 +1,26 @@
 import instance from "./instance";
+import {ProfileType} from "../types/types";
 
 const profileAPI = {
-    getProfile: (userId) => {
+    getProfile: (userId : number) => {
         return (
             instance.get(`profile/${userId}`)
                 .then(response => response.data)
         )
     },
-    getStatus: (userId) => {
+    getStatus: (userId : number) => {
         return (
             instance.get(`profile/status/${userId}`)
                 .then(response => response.data)
         )
     },
-    updateStatus: (status) => {
+    updateStatus: (status : string) => {
         return (
             instance.put(`profile/status`, {status})
                 .then(response => response.data)
         )
     },
-    savePhoto: (photos) => {
+    savePhoto: (photos : any) => {
         const formData = new FormData();
         formData.append("image", photos);
         return (
@@ -30,7 +31,7 @@ const profileAPI = {
             }).then(response => response.data)
         )
     },
-    saveProfile: (profile) => {
+    saveProfile: (profile : ProfileType) => {
         return (
             instance.put(`profile`,profile).then(response => response.data)
         )

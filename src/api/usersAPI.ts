@@ -7,13 +7,13 @@ const usersAPI = {
                 .then(response => response.data)
         )
     },
-    follow: (userId) => {
+    follow: (userId : number) => {
         return (
             instance.post(`follow/${userId}`)
                 .then(response => response.data)
         )
     },
-    unfollow: (userId) => {
+    unfollow: (userId : number) => {
         return (
             instance.delete(`follow/${userId}`)
                 .then(response => response.data)

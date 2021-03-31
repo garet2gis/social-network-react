@@ -1,6 +1,7 @@
-import authAPI from "../api/authAPI";
+import authAPI, {ResultCodesEnum, ResultCodesForCaptcha} from "../api/authAPI";
 import {stopSubmit} from "redux-form";
 import securityAPI from "../api/securityAPI";
+import {AuthDataType, LoginDataType} from "../types/types";
 
 const SET_USER_AUTH_DATA = 'SET_USER_AUTH_DATA';
 const SET_CAPTCHA_URL_SUCCESS = 'SET_CAPTCHA_URL_SUCCESS';
@@ -44,11 +45,6 @@ const authReducer = (state = initialState, action: any): InitialStateType => {
     }
 }
 
-type AuthDataType = {
-    userId:number;
-    email:string;
-    login:string;
-}
 
 type SetUserAuthDataType = {
     type: typeof SET_USER_AUTH_DATA;
@@ -73,24 +69,18 @@ const deleteUserAuthData = ():DeleteUserAuthDataType => ({type: DELETE_USER_AUTH
 
 export const authMe = () => async (dispatch :any) => {
     const data = await authAPI.authMe();
-    if (data.resultCode === 0)
+    if (data.resultCode === ResultCodesEnum.Success)
         dispatch(setUserAuthData(data.data));
 };
 
 
-type LoginDataType = {
-    email:string;
-    password:string;
-    rememberMe:boolean;
-    captcha:string;
-}
 
 export const login = (loginData : LoginDataType) => async (dispatch:any) => {
     let data = await authAPI.login(loginData);
-    if (data.resultCode === 0)
+    if (data.resultCode === ResultCodesEnum.Success)
         dispatch(authMe());
     else {
-        if (data.resultCode === 10)
+        if (data.resultCode === ResultCodesForCaptcha.CaptchaIsRequired)
             dispatch(getCaptchaUrl())
         dispatch(stopSubmit('login', {_error: data.messages.length > 0 ? data.messages[0] : 'Some error'}));
     }
@@ -98,7 +88,7 @@ export const login = (loginData : LoginDataType) => async (dispatch:any) => {
 
 export const logout = () => async (dispatch : any) => {
     let data = await authAPI.logout();
-    if (data.resultCode === 0)
+    if (data.resultCode === ResultCodesEnum.Success)
         dispatch(deleteUserAuthData())
 };
 
